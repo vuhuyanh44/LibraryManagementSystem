@@ -1,23 +1,18 @@
 const { DataTypes } = require('sequelize')
 const db = require('../config/db')
-const Author = db.define('authors', {
-    author_id: {
+const Category = db.define('categories', {
+    category_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    author_name: {
+    category_name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    nationality: {
+    description: {
         type: DataTypes.STRING
     },
-    date_of_death: {
-        type: DataTypes.DATE
-    },
-    date_of_birth: {
-        type: DataTypes.DATE
-    },
 })
-module.exports = Author
+
+module.exports = Category
