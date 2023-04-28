@@ -4,7 +4,8 @@ const db = require('../config/db')
 const BookLine = db.define('book_lines', {
     bookline_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
     },
     bookline_name: {
         type: DataTypes.STRING,
@@ -12,11 +13,7 @@ const BookLine = db.define('book_lines', {
     },
     thumnail: {
         type: DataTypes.STRING
-    },
-    created_at: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
-    },
+    }
 })
 
 module.exports = BookLine

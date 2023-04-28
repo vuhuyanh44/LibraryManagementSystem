@@ -14,10 +14,12 @@ const Author = db.define('authors', {
         type: DataTypes.STRING
     },
     date_of_death: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        allowNull: true
     },
     date_of_birth: {
-        type: DataTypes.DATE
-    },
+        type: DataTypes.DATE,
+        allowNull: true
+    }
 })
 module.exports = Author

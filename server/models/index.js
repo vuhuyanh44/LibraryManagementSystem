@@ -2,7 +2,7 @@ let db = require('../config/db')
 const author = require('./author.model')
 const authorBook = require('./authorBook.model')
 const book = require('./book.model')
-const bookLines = require('./bookLine.model')
+const bookLine = require('./bookLine.model')
 const borrowingOffline = require('./borrowingOffline.model')
 const borrowingOnline = require('./borrowingOnline.model')
 const publisher = require('./publisher.model')
@@ -44,27 +44,27 @@ borrowingOffline.belongsTo(book, {
   foreignKey: "book_id"
 })
 
-//borrowingOnline - bookLines
-bookLines.hasMany(borrowingOnline, {
-  foreignKey: "book_id"
-})
-borrowingOnline.belongsTo(bookLines, {
-  foreignKey: "book_id"
-})
-
-//publisher - bookLines
-publisher.hasMany(bookLines, {
-  foreignKey: "publisher_id"
-})
-bookLines.belongsTo(publisher, {
-  foreignKey: "publisher_id"
-})
-
-//bookLines - authorBook
-bookLines.hasMany(authorBook, {
+//borrowingOnline - bookLine
+bookLine.hasMany(borrowingOnline, {
   foreignKey: "bookline_id"
 })
-authorBook.belongsTo(bookLines, {
+borrowingOnline.belongsTo(bookLine, {
+  foreignKey: "bookline_id"
+})
+
+//publisher - bookLine
+publisher.hasMany(bookLine, {
+  foreignKey: "publisher_id"
+})
+bookLine.belongsTo(publisher, {
+  foreignKey: "publisher_id"
+})
+
+//bookLine - authorBook
+bookLine.hasMany(authorBook, {
+  foreignKey: "bookline_id"
+})
+authorBook.belongsTo(bookLine, {
   foreignKey: "bookline_id"
 })
 
@@ -76,11 +76,11 @@ authorBook.belongsTo(author, {
   foreignKey: "author_id"
 })
 
-//category - bookLines
-category.hasMany(bookLines, {
+//category - bookLine
+category.hasMany(bookLine, {
   foreignKey: "category_id"
 })
-bookLines.belongsTo(category, {
+bookLine.belongsTo(category, {
   foreignKey: "category_id"
 })
 
@@ -92,11 +92,11 @@ book.belongsTo(repository, {
   foreignKey: "repository_id"
 })
 
-// book - bookLines
-bookLines.hasMany(book, {
+// book - bookLine
+bookLine.hasMany(book, {
   foreignKey: "bookline_id"
 })
-book.belongsTo(bookLines, {
+book.belongsTo(bookLine, {
   foreignKey: "bookline_id"
 })
 
@@ -113,7 +113,7 @@ module.exports = {
     author: author,
     authorBook: authorBook,
     book: book,
-    bookLines: bookLines,
+    bookLine: bookLine,
     borrowingOnline: borrowingOnline,
     borrowingOffline:borrowingOffline,
     publisher: publisher,

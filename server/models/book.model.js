@@ -6,15 +6,7 @@ const Book = db.define('books', {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
-    },
-    bookline_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-    created_at: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
-      },
+    }
 })
 
 module.exports = Book
