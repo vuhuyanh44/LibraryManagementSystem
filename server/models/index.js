@@ -2,13 +2,12 @@ let db = require('../config/db')
 const author = require('./author.model')
 const authorBook = require('./authorBook.model')
 const book = require('./book.model')
-const borrowing = require('./borrowing.model')
-const location = require('./location.model')
+const bookLines = require('./bookLine.model')
+const borrowingOffline = require('./borrowingOffline.model')
+const borrowingOnline = require('./borrowingOnline.model')
 const publisher = require('./publisher.model')
 const repository = require('./repository.model')
-const repositoryBook = require('./repositoryBook.model')
 const role = require('./role.model')
-const type = require('./type.model')
 const user = require('./user.model')
 const category = require('./category.model')
 
@@ -20,44 +19,53 @@ user.belongsTo(role, {
   foreignKey: "role_id"
 })
 
-//user - borrowing
-user.hasMany(borrowing, {
+//user - borrowingOffline
+user.hasMany(borrowingOffline, {
   foreignKey: "user_id"
 })
-borrowing.belongsTo(user, {
+borrowingOffline.belongsTo(user, {
   foreignKey: "user_id"
 })
 
-//type - borrowing
-type.hasMany(borrowing, {
-  foreignKey: "type_id"
+//user - borrowingOnline
+user.hasMany(borrowingOnline, {
+  foreignKey: "user_id"
 })
-borrowing.belongsTo(type, {
-  foreignKey: "type_id"
-})
-
-//borrowing - book
-book.hasMany(borrowing, {
-  foreignKey: "book_id"
-})
-borrowing.belongsTo(book, {
-  foreignKey: "book_id"
+borrowingOnline.belongsTo(user, {
+  foreignKey: "user_id"
 })
 
-//publisher - book
-publisher.hasMany(book, {
+
+//borrowingOffline - book
+book.hasMany(borrowingOffline, {
+  foreignKey: "book_id"
+})
+borrowingOffline.belongsTo(book, {
+  foreignKey: "book_id"
+})
+
+//borrowingOnline - bookLines
+bookLines.hasMany(borrowingOnline, {
+  foreignKey: "book_id"
+})
+borrowingOnline.belongsTo(bookLines, {
+  foreignKey: "book_id"
+})
+
+//publisher - bookLines
+publisher.hasMany(bookLines, {
   foreignKey: "publisher_id"
 })
-book.belongsTo(publisher, {
+bookLines.belongsTo(publisher, {
   foreignKey: "publisher_id"
 })
 
-//book - authorBook
-book.hasMany(authorBook, {
-  foreignKey: "book_id"
+//bookLines - authorBook
+bookLines.hasMany(authorBook, {
+  foreignKey: "bookline_id"
 })
-authorBook.belongsTo(book, {
-  foreignKey: "book_id"
+authorBook.belongsTo(bookLines, {
+  foreignKey: "bookline_id"
 })
 
 //author - authorBook
@@ -68,36 +76,28 @@ authorBook.belongsTo(author, {
   foreignKey: "author_id"
 })
 
-//category - book
-category.hasMany(book, {
+//category - bookLines
+category.hasMany(bookLines, {
   foreignKey: "category_id"
 })
-book.belongsTo(category, {
+bookLines.belongsTo(category, {
   foreignKey: "category_id"
 })
 
-//repositoryBook - book
-book.hasMany(repositoryBook, {
-  foreignKey: "book_id"
+//repository - book
+repository.hasMany(book, {
+  foreignKey: "repository_id"
 })
-repositoryBook.belongsTo(book, {
-  foreignKey: "book_id"
-})
-
-//repositoryBook - repository
-repository.hasMany(repositoryBook, {
-  foreignKey: "repository_id" 
-})
-repositoryBook.belongsTo(repository, {
+book.belongsTo(repository, {
   foreignKey: "repository_id"
 })
 
-//repositoryBook - location
-location.hasMany(repositoryBook, {
-  foreignKey: "location_id"
+// book - bookLines
+bookLines.hasMany(book, {
+  foreignKey: "bookline_id"
 })
-repositoryBook.belongsTo(location, {
-  foreignKey: "location_id"
+book.belongsTo(bookLines, {
+  foreignKey: "bookline_id"
 })
 
 
@@ -113,13 +113,12 @@ module.exports = {
     author: author,
     authorBook: authorBook,
     book: book,
-    borrowing: borrowing,
-    location: location,
+    bookLines: bookLines,
+    borrowingOnline: borrowingOnline,
+    borrowingOffline:borrowingOffline,
     publisher: publisher,
     repository: repository,
-    repositoryBook: repositoryBook,
     role: role,
-    type: type,
     user: user,
     category: category
 }

@@ -1,17 +1,13 @@
 const { DataTypes } = require('sequelize')
 const db = require('../config/db')
 
-const Borrowing = db.define('borrowings', {
+const BorrowingOffline = db.define('borrowing_offlines', {
     borrowing_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    borrow_date: {
+    borrowing_date: {
         type: DataTypes.DATE,
         allowNull: false
     },
@@ -23,4 +19,4 @@ const Borrowing = db.define('borrowings', {
     }
 })
 
-module.exports = Borrowing
+module.exports = BorrowingOffline
