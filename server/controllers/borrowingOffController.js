@@ -51,7 +51,7 @@ class BorrowingOffController {
     async getAllBookBorrowed(req, res) {
         try {
             const { user } = req;
-            const book = await db.borrowingOnline.sequelize.query(`SELECT borrowing_id,borrowing_date, return_date, due_date,b.book_id,bookline_name,thumnail,repository_name, address FROM borrowing_offlines
+            const book = await db.borrowingOnline.sequelize.query(`SELECT borrowing_id,borrowing_date, return_date, due_date,b.book_id,bl.bookline_id,bookline_name,thumnail,repository_name, address FROM borrowing_offlines
             inner join books b on b.book_id = borrowing_offlines.book_id
             inner join book_lines bl on bl.bookline_id = b.bookline_id
             inner join repositories r on r.repository_id = b.repository_id
