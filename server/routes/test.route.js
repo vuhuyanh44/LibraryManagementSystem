@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
-
-router.get('/test', (req, res) => {
-    res.status(200).json('test nha 3')
-})
+const authenticateMiddleware = require('../middlewares/authenticate')
+const testController = require('../controllers/testController')
+router.post('/test', authenticateMiddleware.authenticate, testController.login)
 
 module.exports = router;
