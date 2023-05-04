@@ -102,7 +102,7 @@ book.belongsTo(bookLine, {
 
 
 // db.sync({alert:true})
-db.sync({ force: true }) // nếu force: true thì sẽ xóa hết dữ liệu cũ của các bảng liên quan
+db.sync({ force: false }) // nếu force: true thì sẽ xóa hết dữ liệu cũ của các bảng liên quan
   .then(() => {
     console.log('All models were synchronized successfully.');
   })

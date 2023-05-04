@@ -1,6 +1,7 @@
 const db = require('../models/index');
 const sequelize = require('sequelize');
 
+
 class AuthorController {
     
 
@@ -16,6 +17,20 @@ class AuthorController {
             return res.status(200).json({
                 errCode: 0,
                 msg: 'Create author successfully!'
+            })
+        } catch(err) {
+            console.log(err)
+            return res.status(500).json("error")
+        }
+    }
+
+    async getAllAuthor(req, res) {
+        try{
+            const result = await db.author.sequelize.query('SELECT * FROM authors', { type: sequelize.QueryTypes.SELECT });
+            return res.status(200).json({
+                errCode: 0,
+                msg: 'Get all author successfully!',
+                result
             })
         } catch(err) {
             console.log(err)

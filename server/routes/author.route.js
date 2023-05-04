@@ -4,5 +4,6 @@ let authorController = require('../controllers/authorController')
 
 //
 router.post('/author', authorController.createNewAuthor);
+router.get('/author',authorController.getAllAuthor);
 
 module.exports = router;
