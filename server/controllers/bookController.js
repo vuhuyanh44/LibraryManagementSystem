@@ -30,9 +30,14 @@ class BookController {
     //API Lấy toàn bộ sách để hiển thị
     async getAllBook(req, res) {
         try {
-            const books = await Bookline.findAll({
-                include: [{ model: Book }],
-            });
+            const books = await Bookline.sequelize.query(`select book_lines.bookline_id, bookline_name, thumnail, categories.category_name, description, GROUP_CONCAT(DISTINCT author_name ORDER BY author_name ASC SEPARATOR ', ') as authors
+            , publisher_name, publishers.address, publishers.phone from book_lines
+            inner join categories on categories.category_id = book_lines.category_id
+            inner join author_books on author_books.bookline_id = book_lines.bookline_id
+            inner join authors on authors.author_id = author_books.author_id
+            inner join publishers on publishers.publisher_id = book_lines.publisher_id
+            group by bookline_id`,
+                { type: QueryTypes.SELECT });
             res.status(200).json(books);
         } catch (error) {
             console.error(error);
