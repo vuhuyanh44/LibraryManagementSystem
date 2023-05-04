@@ -110,15 +110,15 @@ db.sync({ force: false }) // nếu force: true thì sẽ xóa hết dữ liệu 
     console.error('Unable to sync models:', err);
   });
 module.exports = {
-    author: author,
-    authorBook: authorBook,
-    book: book,
-    bookLine: bookLine,
-    borrowingOnline: borrowingOnline,
-    borrowingOffline:borrowingOffline,
-    publisher: publisher,
-    repository: repository,
-    role: role,
-    user: user,
-    category: category
+  author: author,
+  authorBook: authorBook,
+  book: book,
+  bookLine: bookLine,
+  borrowingOnline: borrowingOnline,
+  borrowingOffline: borrowingOffline,
+  publisher: publisher,
+  repository: repository,
+  role: role,
+  user: user,
+  category: category
 }

@@ -1,3 +1,4 @@
+const express = require("express")
 const testRouter = require('./test.route')
 const authRouter = require('./auth.route')
 const authorRouter = require('./author.route')
@@ -10,22 +11,27 @@ const categoryRouter = require('./category.route')
 const publisherRouter = require('./publisher.route')
 const repositoryRouter = require('./repository.route')
 const roleRouter = require('./role.route')
-const db  = require('../models/index')
+const userRouter = require('./user.route')
+const db = require('../models/index')
 
 function route(app) {
-    app.use('/api',testRouter)
-    app.use('/api',authRouter)
-    app.use('/api',authorRouter)
-    app.use('/api',authorBookRouter)
-    app.use('/api',bookLineRouter)
-    app.use('/api',borrowingOfflineRouter)
-    app.use('/api',bookRouter)
-    app.use('/api',borrowingOnlineRouter)
-    app.use('/api',categoryRouter)
-    app.use('/api',publisherRouter)
+    app.use('/api', testRouter)
+    app.use('/api', authRouter)
+    app.use('/api', authorRouter)
+    app.use('/api', authorBookRouter)
+    app.use('/api', bookLineRouter)
+    app.use('/api', borrowingOfflineRouter)
+    app.use('/api', bookRouter)
+    app.use('/api', borrowingOnlineRouter)
+    app.use('/api', categoryRouter)
+    app.use('/api', publisherRouter)
     app.use('/api', roleRouter)
     app.use('/api', repositoryRouter)
+    app.use('/api', userRouter)
 }
 
 
-module.exports = route
+module.exports = {
+    route
+}
+

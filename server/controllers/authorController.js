@@ -3,10 +3,9 @@ const sequelize = require('sequelize');
 
 
 class AuthorController {
-    
 
     async createNewAuthor(req, res) {
-        try{
+        try {
             const author = req.body;
             await db.author.create({
                 author_name: author.author_name,
@@ -18,7 +17,7 @@ class AuthorController {
                 errCode: 0,
                 msg: 'Create author successfully!'
             })
-        } catch(err) {
+        } catch (err) {
             console.log(err)
             return res.status(500).json("error")
         }
