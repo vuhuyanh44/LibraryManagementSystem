@@ -1,27 +1,68 @@
 const db = require('../models/index');
 const sequelize = require('sequelize');
-
+const { QueryTypes } = require('sequelize');
 class BorrowingOffController {
-    
-
+    //API thuê sách Offline
     async createNewBorrowingOff(req, res) {
-        try{
+        try {
             var now = new Date()
             const borrowingOff = req.body;
+            const { user } = req;
             await db.borrowingOffline.create({
                 book_id: borrowingOff.book_id,
-                user_id: borrowingOff.user_id,
+                user_id: user.userId,
                 borrowing_date: now,
-                return_date: borrowingOff.return_date,
                 due_date: new Date(now.getTime() + (100 * 24 * 60 * 60 * 1000))
             })
             return res.status(200).json({
                 errCode: 0,
                 msg: 'Create borrowingOffline successfully!'
             })
-        } catch(err) {
+        } catch (err) {
             console.log(err)
             return res.status(500).json("error")
+        }
+    }
+    //API trả sách offline
+    async returnBookOffline(req, res) {
+        try {
+            // Check if rental id and user id are provided
+            const { rental_id } = req.body;
+            const { user } = req;
+            if (!rental_id) {
+                return res.status(400).json({ message: 'Rental ID and user ID are required' });
+            }
+            // Find the rental record and update return date
+            const rental = await db.borrowingOffline.findOne({
+                where: { borrowing_id: rental_id, user_id: user.userId, return_date: null }
+            });
+            if (!rental) {
+                return res.status(404).json({ message: 'Rental record not found or book already returned' });
+            }
+            rental.return_date = new Date();
+            await rental.save();
+            return res.status(200).json({ message: 'Book returned successfully' });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+    //API danh sách sách đã thuê offline
+    async getAllBookBorrowed(req, res) {
+        try {
+            const { user } = req;
+            const book = await db.borrowingOnline.sequelize.query(`SELECT borrowing_id,borrowing_date, return_date, due_date,b.book_id,bookline_name,thumnail,repository_name, address FROM borrowing_offlines
+            inner join books b on b.book_id = borrowing_offlines.book_id
+            inner join book_lines bl on bl.bookline_id = b.bookline_id
+            inner join repositories r on r.repository_id = b.repository_id
+            where user_id = ${user.userId}`, { type: QueryTypes.SELECT })
+            if (!book) {
+                return res.status(404).json({ message: 'Book not found' });
+            }
+            res.status(200).json(book);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server error' });
         }
     }
 }
