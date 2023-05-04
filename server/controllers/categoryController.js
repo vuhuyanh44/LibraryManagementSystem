@@ -2,10 +2,9 @@ const db = require('../models/index');
 const sequelize = require('sequelize');
 
 class CategoryController {
-    
 
     async createNewCategory(req, res) {
-        try{
+        try {
             const category = req.body;
             await db.category.create({
                 category_name: category.category_name,
@@ -15,7 +14,7 @@ class CategoryController {
                 errCode: 0,
                 msg: 'Create category successfully!'
             })
-        } catch(err) {
+        } catch (err) {
             console.log(err)
             return res.status(500).json("error")
         }
