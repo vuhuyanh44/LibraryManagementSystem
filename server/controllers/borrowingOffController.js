@@ -14,6 +14,17 @@ class BorrowingOffController {
                 borrowing_date: now,
                 due_date: new Date(now.getTime() + (100 * 24 * 60 * 60 * 1000))
             })
+            const book = await db.book.findOne({
+                where: {
+                    book_id: borrowingOff.book_id
+                }
+            })
+            if (book) {
+                book.idle = 0;
+                book.save()
+            } else {
+                res.status(401).send("Không tìm thấy sách này")
+            }
             return res.status(200).json({
                 errCode: 0,
                 msg: 'Create borrowingOffline successfully!'
