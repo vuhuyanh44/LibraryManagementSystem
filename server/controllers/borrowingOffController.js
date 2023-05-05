@@ -6,18 +6,21 @@ class BorrowingOffController {
     async createNewBorrowingOff(req, res) {
         try {
             var now = new Date()
-            const borrowingOff = req.body;
+            const { bookline_id } = req.body
             const { user } = req;
+
+            const book = await db.book.findOne({
+                where: {
+                    bookline_id: bookline_id,
+                    idle: 1
+                },
+                limit: 1
+            })
             await db.borrowingOffline.create({
-                book_id: borrowingOff.book_id,
+                book_id: book.book_id,
                 user_id: user.userId,
                 borrowing_date: now,
                 due_date: new Date(now.getTime() + (100 * 24 * 60 * 60 * 1000))
-            })
-            const book = await db.book.findOne({
-                where: {
-                    book_id: borrowingOff.book_id
-                }
             })
             if (book) {
                 book.idle = 0;
@@ -31,7 +34,7 @@ class BorrowingOffController {
             })
         } catch (err) {
             console.log(err)
-            return res.status(500).json("error")
+            return res.status(500).json("Hết sách")
         }
     }
     //API trả sách offline
