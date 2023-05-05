@@ -6,6 +6,9 @@ const Book = db.define('books', {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
+    },
+    idle: {
+        type: DataTypes.BOOLEAN
     }
 })
 

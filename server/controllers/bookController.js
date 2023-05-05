@@ -16,7 +16,8 @@ class BookController {
             const book = req.body;
             await db.book.create({
                 bookline_id: book.bookline_id,
-                repository_id: book.repository_id
+                repository_id: book.repository_id,
+                idle: true
             })
             return res.status(200).json({
                 errCode: 0,
@@ -27,6 +28,56 @@ class BookController {
             return res.status(500).json("error")
         }
     }
+
+    async updateBook(req, res) {
+        try{
+        const book_id = req.params.id
+        const book = req.body
+        const data = await db.book.findOne({
+            where: {
+                book_id
+            }
+        })
+        await db.book.update({
+            bookline_id: data.bookline_id,
+            repository_id: book.repository_id,
+            idle: book == null ? data.idle : book.idle
+        }, {
+            where: {
+                book_id
+            }
+        })
+        return res.status(200).json({
+            errCode: 0,
+            msg: 'Update book successfully!'
+        }) 
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json(err)
+
+    }
+}
+    async countBookIdleByBookLineID(req, res) {
+        try {
+            const bookline_id = req.params.id
+            const result1 = await db.book.sequelize.query(`SELECT count(*) as repo1 FROM books where bookline_id = ${bookline_id} and repository_id = 1 `, { type: sequelize.QueryTypes.SELECT });
+            const result2 = await db.book.sequelize.query(`SELECT count(*) as repo2 FROM books where bookline_id = ${bookline_id} and repository_id = 2 `, { type: sequelize.QueryTypes.SELECT });
+            const result3 = await db.book.sequelize.query(`SELECT count(*) as repo3 FROM books where bookline_id = ${bookline_id} and repository_id = 3 `, { type: sequelize.QueryTypes.SELECT });
+            const result4 = await db.book.sequelize.query(`SELECT count(*) as repo4 FROM books where bookline_id = ${bookline_id} and repository_id = 4 `, { type: sequelize.QueryTypes.SELECT });
+            return res.status(200).json({
+                errCode: 0,
+                msg: 'number of book in repo!',
+                result1,
+                result2,
+                result3,
+                result4
+            })
+        }catch(err) {
+            console.log(err)
+            return res.status(500).json("error")
+        }
+    }
+    
     //API Lấy toàn bộ sách để hiển thị
     async getAllBook(req, res) {
         try {

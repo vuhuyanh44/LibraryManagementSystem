@@ -19,6 +19,20 @@ class CategoryController {
             return res.status(500).json("error")
         }
     }
+
+    async getAllCategory(req, res) {
+        try{
+            const result = await db.category.sequelize.query('SELECT * FROM categories', { type: sequelize.QueryTypes.SELECT });
+            return res.status(200).json({
+                errCode: 0,
+                msg: 'Get all category successfully!',
+                result
+            })
+        } catch(err) {
+            console.log(err)
+            return res.status(500).json("error")
+        }
+    }
 }
 
 module.exports = new CategoryController;

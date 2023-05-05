@@ -12,6 +12,7 @@ const publisherRouter = require('./publisher.route')
 const repositoryRouter = require('./repository.route')
 const roleRouter = require('./role.route')
 const userRouter = require('./user.route')
+const upload = require('./upload.route')
 const db = require('../models/index')
 
 function route(app) {
@@ -28,6 +29,7 @@ function route(app) {
     app.use('/api', roleRouter)
     app.use('/api', repositoryRouter)
     app.use('/api', userRouter)
+    app.use('/api', upload)
 }
 
 
