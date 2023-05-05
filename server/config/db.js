@@ -16,17 +16,17 @@
 // module.exports = connection
 const { Sequelize } = require('sequelize')
 
-const db = new Sequelize('library_management_db', 'root', null, {
-    host: 'localhost',
-    dialect: 'mysql',
-    logging: false
+const db = new Sequelize('library_management_db', 'root', "anhquan1", {
+  host: 'localhost',
+  dialect: 'mysql',
+  logging: false
 })
 
 try {
-    db.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
+  db.authenticate();
+  console.log('Connection has been established successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
 }
 
 module.exports = db

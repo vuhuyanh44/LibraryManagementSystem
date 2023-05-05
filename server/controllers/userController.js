@@ -23,7 +23,7 @@ class LoginController {
                     message: 'Invalid email or password',
                 });
             }
-            const token = jwt.sign({ userId: user.id }, secretKey, {
+            const token = jwt.sign({ userId: user.user_id }, secretKey, {
                 expiresIn: '1h',
             });
             return res.status(200).json({

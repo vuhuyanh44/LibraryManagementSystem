@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 let borrowingOnlineController = require('../controllers/borrowingOnlController')
+let authenticate = require('../middlewares/authenticate')
 
 //
-router.post('/borrowing-online', borrowingOnlineController.createNewBorrowingOnl);
+router.post('/borrowing-online', authenticate.authenticate, borrowingOnlineController.createNewBorrowingOnl);
+router.get('/borrowed-book/', authenticate.authenticate, borrowingOnlineController.getBorrowedBookOnline)
 
 module.exports = router;

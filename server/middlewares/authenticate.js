@@ -12,10 +12,10 @@ class authenticateMiddleware {
                 console.log(decode);
                 return next();
             } else {
-                res.status(401).send("Ban chua dang nhap")
+                res.status(401).send("Bạn chưa đăng nhập")
             }
         } catch (error) {
-            res.status(500).send("Ban chua dang nhap")
+            res.status(500).send("Bạn chưa đăng nhập")
         }
 
     };
