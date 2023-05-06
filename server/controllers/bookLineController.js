@@ -1,5 +1,6 @@
 const db = require('../models/index');
 const sequelize = require('sequelize');
+const { QueryTypes } = require('sequelize');
 
 function convertToFileName(text) {
     let fileName = text
@@ -61,6 +62,25 @@ class BookLineController {
         console.log(err)
         return res.status(500).json(err)
 
+    }
+}
+    
+    async getAllBookLine(req, res) {
+        try {
+        const booklines = await db.bookLine.sequelize.query(`select book_lines.bookline_id as _id, bookline_name, thumnail, categories.category_name, description as category_description, GROUP_CONCAT(DISTINCT author_name ORDER BY author_name ASC SEPARATOR ', ') as authors
+        , publisher_name, publishers.address as publisher_address, publishers.phone as publisher_phone from book_lines
+        inner join categories on categories.category_id = book_lines.category_id
+        inner join author_books on author_books.bookline_id = book_lines.bookline_id
+        inner join authors on authors.author_id = author_books.author_id
+        inner join publishers on publishers.publisher_id = book_lines.publisher_id
+        group by _id`,
+        { type: QueryTypes.SELECT })
+        return res.status(200).json({
+            booklines
+        })
+    } catch(err) {
+        console.log(err)
+        return res.status(500).json(err)
     }
 }
 }
