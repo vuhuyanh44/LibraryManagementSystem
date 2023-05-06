@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Statistical() {
-  
+
 
   const [dataManufacture, setDataManufacture] = useState([]);
 
@@ -14,7 +14,6 @@ export default function Statistical() {
       <Sidebar />
       <div className="wrapper">
         <Navbar />
-        
       </div>
     </div>
   );

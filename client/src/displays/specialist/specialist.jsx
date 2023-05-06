@@ -4,25 +4,21 @@ import Navbar from '../../components/navbar/navbar';
 import {
     BrowserRouter as Router,
     Routes,
-    Route, 
+    Route,
     Navigate
-  } from "react-router-dom";
+} from "react-router-dom";
 import Statistical from './pages/statistical/statistical';
 import Book from './pages/book/book';
 import BookLines from './pages/bookLines/bookLines';
 
-
-
-
 export default function Specialist() {
-    return(
+    return (
         <div className="container">
             <Router>
                 <Routes>
-                    <Route path='/' element = {<Statistical/>}/>
-                    <Route path='/book' element = {<Book/>}/>
-                    <Route path='/book-lines' element = {<BookLines/>}/>
-
+                    <Route path='/' element={<Statistical />} />
+                    <Route path='/book' element={<Book />} />
+                    <Route path='/book-lines' element={<BookLines />} />
                 </Routes>
             </Router>
         </div>

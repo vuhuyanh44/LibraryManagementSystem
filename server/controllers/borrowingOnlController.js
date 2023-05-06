@@ -8,12 +8,21 @@ class BorrowingOnlController {
         try {
             const borrowingOnl = req.body;
             const { user } = req;
-            console.log(user);
-            await db.borrowingOnline.create({
-                bookline_id: borrowingOnl.bookline_id,
-                user_id: user.userId,
-                borrowing_date: new Date(),
+            const isRental = await db.borrowingOnline.findOne({
+                where: {
+                    bookline_id: borrowingOnl.bookline_id,
+                    user_id: user.userId,
+                }
             })
+            if (isRental) {
+                return res.status(500).json("Sách đã mượn rồi")
+            } else {
+                await db.borrowingOnline.create({
+                    bookline_id: borrowingOnl.bookline_id,
+                    user_id: user.userId,
+                    borrowing_date: new Date(),
+                })
+            }
             return res.status(200).json({
                 errCode: 0,
                 msg: 'Create borrowingOnline successfully!'
