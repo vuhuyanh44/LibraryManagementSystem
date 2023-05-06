@@ -27,6 +27,7 @@ class LoginController {
                 expiresIn: '1h',
             });
             return res.status(200).json({
+                user,
                 token: token,
             });
         } catch (error) {
