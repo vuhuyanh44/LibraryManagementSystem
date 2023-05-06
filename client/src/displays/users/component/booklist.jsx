@@ -5,6 +5,7 @@ import "../css/modal.css"
 import BookDetailModal from "./modal"
 function Book(props) {
     const [books, setBooks] = useState([]);
+    const [selectedBookId, setSelectedBookId] = useState(null);
     useEffect(() => {
         if (props.searchKeyword !== "") {
             axios
@@ -18,8 +19,16 @@ function Book(props) {
                 });
         }
     }, [props.searchKeyword]);
-    const [selectedBookId, setSelectedBookId] = useState(null);
-
+    async function filterByCategory(category) {
+        console.log("Đã click");
+        try {
+            const response = await axios.get(`http://localhost:5000/api/book/filter?category=${category}`);
+            setBooks(response.data);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
     const handleBookClick = (bookId) => {
         setSelectedBookId(bookId);
     };
@@ -37,6 +46,15 @@ function Book(props) {
                     ))}
                 </div>
             </div>
+            <div class="sidebar">
+                <h3>Thể loại</h3>
+                <button className="filter-btn" onClick={() => filterByCategory('Toán học')}>Toán học</button>
+                <button className="filter-btn" onClick={() => filterByCategory('Văn học')}>Văn học</button>
+                <button className="filter-btn" onClick={() => filterByCategory('Khoa học kĩ thuật')}>Khoa học kĩ thuật</button>
+                <button className="filter-btn" onClick={() => filterByCategory('Công nghệ thông tin')}>Công nghệ thông tin</button>
+                <button className="filter-btn" onClick={() => filterByCategory('Văn học')}>Văn học</button>
+            </div>
+
             <BookDetailModal
                 bookId={selectedBookId}
                 showModal={Boolean(selectedBookId)}

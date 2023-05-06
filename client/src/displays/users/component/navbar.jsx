@@ -20,7 +20,7 @@ function Navbar(props) {
                     <img src={companyLogo} alt="logo" />
                 </div>
                 <ul className="nav-links">
-                    <li><Link to="/rental">Home</Link></li>
+                    <li><Link to="/">Home</Link></li>
                     <li><Link to="/books-online">Sách đã thuê online</Link></li>
                     <li><Link to="/books-offline">Sách đã thuê offline</Link></li>
                     <li className="search-bar-container">

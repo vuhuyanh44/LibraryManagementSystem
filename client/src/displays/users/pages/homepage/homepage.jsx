@@ -17,7 +17,7 @@ export default function Homepage() {
             <Navbar onSearch={handleSearchResult} />
             <Books searchKeyword={searchResult} />
             <Routes>
-                <Route exact path="/rental" component={Homepage} />
+                <Route exact path="/" component={Homepage} />
                 <Route path="/books-online" component={BookOnline} />
                 <Route path="/books-offline" component={BookOffline} />
             </Routes>
