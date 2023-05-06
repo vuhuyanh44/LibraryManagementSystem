@@ -5,7 +5,7 @@ export default function User() {
         <div className="container">
             <Router>
                 <Routes>
-                    <Route path='/rental' element={<Homepage />} />
+                    <Route path='/' element={<Homepage />} />
                 </Routes>
             </Router>
         </div>
