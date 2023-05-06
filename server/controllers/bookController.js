@@ -30,33 +30,33 @@ class BookController {
     }
 
     async updateBook(req, res) {
-        try{
-        const book_id = req.params.id
-        const book = req.body
-        const data = await db.book.findOne({
-            where: {
-                book_id
-            }
-        })
-        await db.book.update({
-            bookline_id: data.bookline_id,
-            repository_id: book.repository_id,
-            idle: book == null ? data.idle : book.idle
-        }, {
-            where: {
-                book_id
-            }
-        })
-        return res.status(200).json({
-            errCode: 0,
-            msg: 'Update book successfully!'
-        }) 
-    } catch (err) {
-        console.log(err)
-        return res.status(500).json(err)
+        try {
+            const book_id = req.params.id
+            const book = req.body
+            const data = await db.book.findOne({
+                where: {
+                    book_id
+                }
+            })
+            await db.book.update({
+                bookline_id: data.bookline_id,
+                repository_id: book.repository_id,
+                idle: book == null ? data.idle : book.idle
+            }, {
+                where: {
+                    book_id
+                }
+            })
+            return res.status(200).json({
+                errCode: 0,
+                msg: 'Update book successfully!'
+            })
+        } catch (err) {
+            console.log(err)
+            return res.status(500).json(err)
 
+        }
     }
-}
     async countBookIdleByBookLineID(req, res) {
         try {
             const bookline_id = req.params.id
@@ -72,12 +72,12 @@ class BookController {
                 result3,
                 result4
             })
-        }catch(err) {
+        } catch (err) {
             console.log(err)
             return res.status(500).json("error")
         }
     }
-    
+
     //API Lấy toàn bộ sách để hiển thị
     async getAllBook(req, res) {
         try {
@@ -89,7 +89,8 @@ class BookController {
             inner join publishers on publishers.publisher_id = book_lines.publisher_id
             inner join books on books.bookline_id = book_lines.bookline_id 
             inner join repositories on repositories.repository_id = books.repository_id
-            group by bookline_id`,
+            group by bookline_id
+            limit 9`,
                 { type: QueryTypes.SELECT });
             res.status(200).json(books);
         } catch (error) {
