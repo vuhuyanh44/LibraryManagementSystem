@@ -83,5 +83,32 @@ class BookLineController {
         return res.status(500).json(err)
     }
 }
+
+    // lấy ra tên các dòng sách và số lượng của chúng
+    async getAllBookLineNames(req, res) {
+        try {
+        const bookLines = await db.bookLine.findAll({
+            include: [
+            {
+                model: db.book,
+                attributes: [],
+            },
+            ],
+            attributes: [
+            "bookline_name",
+            [sequelize.fn("COUNT", sequelize.col("*")), "quantity"],
+            ],
+            group: ["book_lines.bookline_name"],
+        });
+        return res.status(200).json({
+            errCode: 0,
+            data: bookLines,
+            msg: "Get book lines successfully!",
+        });
+        } catch (error) {
+        console.error("Error occurred:", error);
+        return res.status(500).json("error");
+        }
+    }
 }
 module.exports = new BookLineController;

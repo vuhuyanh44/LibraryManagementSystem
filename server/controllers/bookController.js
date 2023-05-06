@@ -175,6 +175,39 @@ class BookController {
             res.status(500).json({ message: 'Server error' });
         }
     }
+
+    //đếm số lượng sách có trong kho
+  async getBookCount(req, res) {
+    try {
+      const bookCount = await db.book.count();
+      return res.status(200).json({
+        errCode: 0,
+        data: bookCount,
+        msg: "Get book count successfully!",
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json("error");
+    }
+  }
+
+  //đếm số lượng sách thêm mới theo thời gian
+  async getNumNewBooks(req, res) {
+    try {
+      const { start_date, end_date } = req.query;
+      const result = await db.book.sequelize.query(
+        `CALL get_num_new_books('${start_date}', '${end_date}')`
+      );
+      return res.status(200).json({
+        errCode: 0,
+        msg: "successfully!",
+        result,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ errCode: 2, msg: "Internal server error" });
+    }
+  }
 }
 
 module.exports = new BookController;

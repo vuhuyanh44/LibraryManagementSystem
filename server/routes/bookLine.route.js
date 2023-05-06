@@ -7,4 +7,6 @@ router.post('/book-line', bookLineController.createNewBookLine);
 router.put('/book-line/:id',bookLineController.updateBookLine);
 router.get('/book-line', bookLineController.getAllBookLine);
 
+router.get('/bookLine-count', bookLineController.getAllBookLineNames);
+
 module.exports = router;

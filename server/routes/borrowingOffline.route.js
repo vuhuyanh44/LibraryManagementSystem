@@ -6,4 +6,7 @@ const authenticate = require('../middlewares/authenticate')
 router.post('/borrowing-offline', authenticate.authenticate, borrowingOfflineController.createNewBorrowingOff);
 router.post('/return-book', authenticate.authenticate, borrowingOfflineController.returnBookOffline)
 router.get('/get-book-borrowed-offline', authenticate.authenticate, borrowingOfflineController.getAllBookBorrowed)
+
+router.put('/borrowingOff/:borrowing_id', borrowingOfflineController.updateBorrowingOff);
+router.get('/borrowOffCountByDateRange', borrowingOfflineController.getBorrowOffCountByDateRange);
 module.exports = router;

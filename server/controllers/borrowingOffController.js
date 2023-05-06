@@ -79,6 +79,57 @@ class BorrowingOffController {
             res.status(500).json({ message: 'Server error' });
         }
     }
+
+    //sửa thông tin liên quan đến mượn off.
+    async updateBorrowingOff(req, res) {
+        try {
+        const { borrowing_id } = req.params;
+        const { book_id, user_id, return_date } = req.body;
+        const borrowingOff = await db.borrowingOffline.findOne({
+            where: { borrowing_id },
+        });
+        if (!borrowingOff) {
+            return res.status(404).json({
+            errCode: 1,
+            msg: "BorrowingOffline not found",
+            });
+        }
+        borrowingOff.book_id = book_id || borrowingOff.book_id;
+        borrowingOff.user_id = user_id || borrowingOff.user_id;
+        borrowingOff.return_date = return_date || borrowingOff.return_date;
+        await borrowingOff.save();
+        return res.status(200).json({
+            errCode: 0,
+            msg: "Update borrowingOffline successfully!",
+        });
+        } catch (err) {
+        console.log(err);
+        return res.status(500).json({
+            errCode: 2,
+            msg: "Internal server error",
+        });
+        }
+    }
+
+  
+    //Số lượng người mượn tài liệu off theo thời gian.
+    async getBorrowOffCountByDateRange(req, res) {
+        try {
+        const { start_date, end_date } = req.query;
+        const result = await db.borrowingOffline.sequelize.query(
+            `CALL get_num_user_borrowers_off('${start_date}', '${end_date}')`
+        );
+        //console.log(result)
+        return res.status(200).json({
+            errCode: 0,
+            msg: "Get borrow count successfully!",
+            result,
+        });
+        } catch (err) {
+        console.log(err);
+        return res.status(500).json({ errCode: 2, msg: "Internal server error" });
+        }
+    }
 }
 
 module.exports = new BorrowingOffController;

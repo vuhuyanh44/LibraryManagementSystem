@@ -41,6 +41,25 @@ class BorrowingOnlController {
             res.status(500).json({ message: 'Server error' });
         }
     }
+
+    // Số lượng người mượn tài liệu online theo thời gian.
+    async getBorrowOnlCountByDateRange(req, res) {
+        try {
+        const { start_date, end_date } = req.query;
+        const result = await db.borrowingOnline.sequelize.query(
+            `CALL get_num_user_borrowers_onl('${start_date}', '${end_date}')`
+        );
+        //console.log(result)
+        return res.status(200).json({
+            errCode: 0,
+            msg: "Get borrow count successfully!",
+            result,
+        });
+        } catch (err) {
+        console.log(err);
+        return res.status(500).json({ errCode: 2, msg: "Internal server error" });
+        }
+    }
 }
 
 module.exports = new BorrowingOnlController;
