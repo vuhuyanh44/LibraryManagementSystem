@@ -27,4 +27,13 @@ router.get(
   "/borrowOffCount/date",
   borrowingOfflineController.getBorrowOffCountByDateRange
 );
+/*router.get(
+  "/infoBorrowOff/:borrowing_id",
+  borrowingOfflineController.getInfoBorrowsOff
+);*/
+router.get(
+  "/infoBorrowOff",
+  borrowingOfflineController.getInfoBorrowsOff
+);
+
 module.exports = router;

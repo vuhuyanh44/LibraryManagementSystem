@@ -1,5 +1,6 @@
 import './App.css';
 import Specialist from './displays/specialist/specialist';
+import Admin from './displays/admin/admin'
 import SignIn from './displays/signIn/signIn';
 import {
   BrowserRouter as Router,
@@ -26,7 +27,11 @@ function App() {
     }
     if (user.role_id === 3 ){
       return <Specialist/>
-    }else{
+    }
+    if (user.role_id === 2 ){
+      return <Admin/>
+    }
+    else{
       return(
         <Router>
         <Routes>
