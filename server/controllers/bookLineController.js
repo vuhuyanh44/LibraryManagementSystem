@@ -110,5 +110,25 @@ class BookLineController {
         return res.status(500).json("error");
         }
     }
+
+    //Đếm số lượng dòng sách 
+    async getBookLineCount(req, res) {
+        try {
+          const bookLineCount = await db.book.sequelize.query(
+            `SELECT COUNT(*) as number_of_booklines
+              FROM book_lines
+              `,
+            { type: QueryTypes.SELECT }
+          );
+          return res.status(200).json({
+            errCode: 0,
+            result: bookLineCount,
+            msg: "Get book count successfully!",
+          });
+        } catch (err) {
+          console.log(err);
+          return res.status(500).json("error");
+        }
+      }
 }
 module.exports = new BookLineController;

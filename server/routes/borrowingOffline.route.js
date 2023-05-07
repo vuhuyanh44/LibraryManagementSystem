@@ -35,6 +35,10 @@ router.get(
   "/infoBorrowOff",
   borrowingOfflineController.getInfoBorrowsOff
 );
+router.post(
+  "/createBorrowing-offline",
+  borrowingOfflineController.newBorrowingOff
+);
 
 router.post(
     "/createBorrowing-offline",

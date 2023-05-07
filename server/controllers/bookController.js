@@ -219,7 +219,7 @@ class BookController {
       );
       return res.status(200).json({
         errCode: 0,
-        data: bookCount,
+        result: bookCount,
         msg: "Get book count successfully!",
       });
     } catch (err) {

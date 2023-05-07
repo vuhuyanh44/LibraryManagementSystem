@@ -1,4 +1,3 @@
-
 .sidebar3 {
     flex: 1;
     border-right: 0.5px solid lightgray;
@@ -11,14 +10,15 @@
 
 }
 
-div.center3 ul{
+div.center3 ul {
     list-style: none;
     margin: 0;
     padding: 0rem;
     width: 100%;
 }
 
-li,button {
+li,
+button {
     height: 50px;
     display: flex;
     align-items: center;
@@ -43,12 +43,14 @@ ul :hover {
     background: #ece8ff;
 }
 
-.logout3 > div {
+.logout3>div {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 /*#7451f8 */
-.icon3, .iconlogout3 {
+.icon3,
+.iconlogout3 {
     color: #7451f8;
     font-size: 30px;
 }
@@ -64,6 +66,7 @@ span {
     color: #888;
     margin-left: 10px;
 }
+
 div.logout3 button {
     font-size: 15px;
     font-weight: 600;
@@ -73,11 +76,12 @@ div.logout3 button {
 }
 
 a.active>li {
-    background: #ece8ff; 
+    background: #ece8ff;
     margin-left: 0px;
     position: relative;
 }
-a.active>li::before{
+
+a.active>li::before {
     content: ' ';
     left: 0%;
     width: 7px;

@@ -43,7 +43,7 @@ export default function Sidebar() {
 
             </div>
 
-            <div className='logout3' title='log out'>
+            <div className='logout3' title='log out' >
                 {/* <FiLogOut className='iconlogout3' /> */}
                 <button onClick={() => {
                     localStorage.clear()
