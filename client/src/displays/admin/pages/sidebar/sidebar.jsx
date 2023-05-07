@@ -33,13 +33,6 @@ export default function Sidebar() {
                         </li>
                     </NavLink>
 
-                    <NavLink style={{ textDecoration: 'none' }} to='/infoBookNew'>
-                        <li title='product'>
-                            <IoCarSport className='icon3' />
-                            <span>Book</span>
-                        </li >
-                    </NavLink>
-
                     <NavLink style={{ textDecoration: 'none' }} to='/infoBorrowsOff'>
                         <li title='product'>
                             <IoCarSport className='icon3' />
@@ -51,7 +44,7 @@ export default function Sidebar() {
 
             </div>
 
-            <div className='logout3' title='log out'>
+            <div className='logout3' title='log out' >
                 {/* <FiLogOut className='iconlogout3' /> */}
                 <button onClick={() => {
                     localStorage.clear()

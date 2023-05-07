@@ -3,72 +3,189 @@ import Sidebar from "../sidebar/sidebar";
 import Navbar from "../../../../components/navbar/navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { IoAddCircle, IoPeopleSharp, IoBook, IoSaveSharp } from "react-icons/io5";
+
 
 export default function Statistical() {
-  const [dataBorrowing, setDataBorrowing] = useState([]);
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
 
-  // Fetch borrowing data from backend API
+  var now = new Date();
+
+  const [startDate, setStartDate] = useState(now);
+  const [endDate, setEndDate] = useState(now);
+  const [num_borrowers_off, setNumBorrowersOff] = useState("");
+  const [num_books, setNumBooks] = useState("");
+  const [num_new_books, setNewBoos] = useState("");
+  const [num_borrowers_onl, setNumBorrowersOnl] = useState("");
+  const [num_booklines, setNumBookLines] = useState("");
+  
+
   useEffect(() => {
-    const fetchData = async () => {
-      if (startTime && endTime) {
-        const response = await axios.get(`localhost:5000/api/borrowOffCount/date?start_date=${startTime}&end_date=${endTime}`);
-        const numBorrowersOff = response.data.result[0].num_borrowers_off;
-        setDataBorrowing(numBorrowersOff);
-      }
+    if (startDate && endDate) {
+      axios.get(`http://localhost:5000/api/borrowOffCount/date?start_date=${startDate}&end_date=${endDate}`)
+        .then(res => {
+          const numBorrowersOff = res.data.result[0]['num_borrowers_off'];
+          setNumBorrowersOff(numBorrowersOff);
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
-    fetchData();
-  }, [startTime, endTime]);
+  }, [startDate, endDate]);
 
-  // Filter borrowing data based on time range
-  const filterBorrowingData = () => {
-    const filteredData = dataBorrowing.filter(borrowing => {
-      const borrowingDate = new Date(borrowing.borrowedDate);
-      return borrowingDate >= new Date(startTime) && borrowingDate <= new Date(endTime);
-    });
-    return filteredData.length;
-  };
-
-  // Handle input change events
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    if (name === "startTime") {
-      setStartTime(value);
-    } else if (name === "endTime") {
-      setEndTime(value);
+  useEffect(() => {
+    if (startDate && endDate) {
+      axios.get(`http://localhost:5000/api/book-count`)
+        .then(res => {
+          const numBooks = res.data.result[0]['number_of_books'];
+          setNumBooks(numBooks);
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
-  };
+  }, [startDate, endDate]);
 
-  // Handle submit button click event
-  const handleButtonClick = (event) => {
-    event.preventDefault();
-    const filteredData = filterBorrowingData();
-    console.log(filteredData);
-  };
+  
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      axios.get(`http://localhost:5000/api/newBook-count/date?start_date=${startDate}&end_date=${endDate}`)
+        .then(res => {
+          const numNewBooks = res.data.result[0]['numNewBooks'];
+          setNewBoos(numNewBooks);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+  }, [startDate, endDate]);
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      axios.get(`http://localhost:5000/api/borrowOnlCount/date?start_date=${startDate}&end_date=${endDate}`)
+        .then(res => {
+          const numBorrowersOnl = res.data.result[0]['num_borrowers_onl'];
+          setNumBorrowersOnl(numBorrowersOnl);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+  }, [startDate, endDate]);
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      axios.get(`http://localhost:5000/api/bookLine-count`)
+        .then(res => {
+          const numBooklines = res.data.result[0]['number_of_booklines'];
+          setNumBookLines(numBooklines);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+  }, [startDate, endDate]);
+
+  const handleStartDateChange = (e) => {
+    setStartDate(e.target.value);
+  }
+
+  const handleEndDateChange = (e) => {
+    setEndDate(e.target.value);
+  }
 
   // Display filtered borrowing data in the UI
   return (
     <div className="statistical">
       <Sidebar />
       <div className="wrapper">
-        <Navbar />
-        <div>
-          <h2>Number of people who borrowed books:</h2>
-          <form onSubmit={handleButtonClick}>
-            <div>
-              <label htmlFor="startTime">Start Time:</label>
-              <input type="text" name="startTime" value={startTime} onChange={handleInputChange} />
-            </div>
-            <div>
-              <label htmlFor="endTime">End Time:</label>
-              <input type="text" name="endTime" value={endTime} onChange={handleInputChange} />
-            </div>
-            <button type="submit">Submit</button>
-          </form>
-          <p>{dataBorrowing}</p>
+        <div className='title'>
+          <h1>Statistical</h1>
+          <Navbar />
         </div>
+        
+        <div>
+          <form>
+
+            <div class="childForm">
+              <label htmlFor="startDate">Start Time:</label>
+              <input className="ip" type="date" name="startDate" value={startDate} onChange={handleStartDateChange} />
+            </div>
+            <div class="childForm">
+              <label htmlFor="endTime">End Time:</label>
+              <input className='ip' type="date" name="endTime" value={endDate} onChange={handleEndDateChange} />
+            </div>
+          </form>
+          <p></p>
+        </div>
+
+        <div class="statis">
+          <div class="col-md-12 grid-margin">
+            <div class="row_statistic_first">
+              <div class="column-5 grid-margin">
+                <div class="d-flex">
+                  <div class="icn">
+                    <IoAddCircle fontSize="40px" />
+                  </div>
+                  <div class="wrapper">
+                    <h3 class="font-weight-semibold">{num_new_books}</h3>
+                    <h5 class="font-weight-medium text-primary">New Book</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="column-5 grid-margin">
+                <div class="d-flex">
+                  <div class="icn">
+                    <IoPeopleSharp fontSize="40px" color="green" />
+                  </div>
+                  <div class="wrapper">
+                    <h3 class="font-weight-semibold">{num_borrowers_onl}</h3>
+                    <h5 class="font-weight-medium text-primary">Borrow Online</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="column-5 grid-margin">
+                <div class="d-flex">
+                  <div class="icn">
+                    <IoPeopleSharp fontSize="40px" color="red" />
+                  </div>
+                  <div class="wrapper">
+                    <h3 class="font-weight-semibold">{num_borrowers_off}</h3>
+                    <h5 class="font-weight-medium text-primary">Borrow Offline</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='row_statistic_second'>
+              <div class="column-5 grid-margin">
+                <div class="d-flex">
+                <div class="icn">
+                    <IoBook fontSize="40px" />
+                  </div>
+                  <div class="wrapper">
+                    <h3 class="font-weight-semibold">{num_booklines}</h3>
+                    <h5 class="font-weight-medium text-primary">Book Line</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="column-5 grid-margin">
+                <div class="d-flex">
+                <div class="icn">
+                    <IoSaveSharp fontSize="40px" />
+                  </div>
+                  <div class="wrapper">
+                    <h3 class="font-weight-semibold">{num_books}</h3>
+                    <h5 class="font-weight-medium text-primary">Available</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
   );
+  
 }

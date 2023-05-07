@@ -146,7 +146,7 @@ class BorrowingOffController {
     try {
       //const { borrowing_id } = req.params;
       const result = await db.borrowingOffline.sequelize.query(
-        `SELECT borrows.user_id as _id, users.username as name, books.book_id, book_lines.bookline_name AS book_name, DATE_FORMAT(DATE(borrows.borrowing_date), '%Y-%m-%d') as borrow_date, DATE_FORMAT(TIME(borrows.borrowing_date), '%H:%i:%s') as borrow_time, 
+        `SELECT borrows.borrowing_id as _id, borrows.user_id as user_id, users.username as name, books.book_id as _idbook, book_lines.bookline_name AS book_name, DATE_FORMAT(DATE(borrows.borrowing_date), '%Y-%m-%d') as borrow_date, DATE_FORMAT(TIME(borrows.borrowing_date), '%H:%i:%s') as borrow_time, 
         DATE_FORMAT(DATE(borrows.return_date), '%Y-%m-%d') as return_date,
                     CASE 
                         WHEN borrows.return_date IS NULL THEN 'Đang mượn' 
@@ -169,6 +169,42 @@ class BorrowingOffController {
       return res.status(500).json({ errCode: 2, msg: "Internal server error" });
     }
   }
+
+  // cho mượn off thủ thư
+  async newBorrowingOff(req, res) {
+    try {
+      var now = new Date();
+      const borrowingOff = req.body;
+
+      const book = await db.book.findOne({
+        where: {
+          book_id: borrowingOff.book_id,
+          idle: 1,
+        },
+      });
+
+      if (!book) {
+        return res.status(401).send("Không tìm thấy sách này");
+      }
+
+      
+      await db.borrowingOffline.create({
+        book_id: borrowingOff.book_id,
+        user_id: borrowingOff.user_id,
+        borrowing_date: now,
+        return_date: borrowingOff.return_date,
+        due_date: new Date(now.getTime() + 100 * 24 * 60 * 60 * 1000),
+      });
+      return res.status(200).json({
+        errCode: 0,
+        msg: "Create borrowingOffline successfully!",
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json("error");
+    }
+  }
 }
 
 module.exports = new BorrowingOffController();
+
