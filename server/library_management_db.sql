@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: May 07, 2023 at 10:56 AM
+-- Generation Time: May 07, 2023 at 06:07 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -432,20 +432,20 @@ INSERT INTO `book_lines` (`bookline_id`, `bookline_name`, `document_url`, `thumb
 (45, 'Ngủ ít vẫn khỏe', 'http://localhost:5000/api/open-pdf/ngu-it-van-khoe.pdf', 'http://localhost:5000/api/open-pdf/ngu-it-van-khoe.jpg', '2023-05-07 10:04:49', '2023-05-07 10:04:49', 4, 6),
 (46, 'Uống trà trị bách bệnh', 'http://localhost:5000/api/open-pdf/uong-tra-tri-bach-benh.pdf', 'http://localhost:5000/api/open-pdf/uong-tra-tri-bach-benh.jpg', '2023-05-07 10:06:08', '2023-05-07 10:06:08', 3, 6),
 (47, 'Để lành bệnh tự nhiên', 'http://localhost:5000/api/open-pdf/de-lanh-benh-tu-nhien.pdf', 'http://localhost:5000/api/open-pdf/de-lanh-benh-tu-nhien.jpg', '2023-05-07 10:07:25', '2023-05-07 10:07:25', 2, 6),
-(48, 'Định vị - Cuộc chiến giành tâm lý khách hàng', 'dinh-vi.pdf', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 2, 7),
-(49, 'Đánh cắp ý tưởng', 'danh-cap-y-tuong.pdff', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 3, 7),
-(50, '1001 cách giữ chân khách hàng', '1001-cach-giu-chan-khach-hang.pdf', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 4, 7),
-(51, 'Khởi nghiệp tinh gọn', 'khoi-nghiep-tinh-gon.pdf', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 2, 7),
-(52, 'Bí quyết kinh doanh', 'bi-quyet-kinh-doanh.pdf', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 3, 7),
-(53, 'Thuật khởi nghiệp', 'thuat-khoi-nghiep.pdf', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 2, 7),
-(54, 'Tạm biệt cà rốt và cây gậy', 'tam-biet-ca-rot-va-cay-gay.pdf', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 4, 7),
-(62, 'Chủ nghĩa vô thần', 'chu-nghia-vo-than.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
-(63, 'Triết lý làm giàu của người Do Thái', 'triet-ly-lam-giau-cua-nguoi-do-thai.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
-(64, 'Hoa nam kinh', 'hoa-nam-kinh.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 4, 8),
-(65, 'Một giọt từ sự đọa đày', 'mot-giot-tu-su-doa-day.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
-(66, 'Luận về biếu tặng', 'luan-ve-bieu-tang.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 2, 8),
-(67, 'Kinh tế Việt Nam', 'kinh-te-viet-nam.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
-(68, 'Hành trình tri thức của Karl Marx', 'hanh-trinh-tri-thuc-cua-Karl-Marx.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 2, 8);
+(48, 'Định vị - Cuộc chiến giành tâm lý khách hàng', 'http://localhost:5000/api/open-pdf/dinh-vi.pdf', 'http://localhost:5000/api/open-pdf/dinh-vi.jpg\r\n', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 2, 7),
+(49, 'Đánh cắp ý tưởng', 'http://localhost:5000/api/open-pdf/danh-cap-y-tuong.pdf', 'http://localhost:5000/api/open-pdf/danh-cap-y-tuong.jpg', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 3, 7),
+(50, '1001 cách giữ chân khách hàng', 'http://localhost:5000/api/open-pdf/1001-cach-giu-chan-khach-hang.pdf', 'http://localhost:5000/api/open-pdf/1001-cach-giu-chan-khach-hang.jpg', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 4, 7),
+(51, 'Khởi nghiệp tinh gọn', 'http://localhost:5000/api/open-pdf/khoi-nghiep-tinh-gon.pdf', 'http://localhost:5000/api/open-pdf/khoi-nghiep-tinh-gon.jpg', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 2, 7),
+(52, 'Bí quyết kinh doanh', 'http://localhost:5000/api/open-pdf/bi-quyet-kinh-doanh.pdf', 'http://localhost:5000/api/open-pdf/bi-quyet-kinh-doanh.jpg', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 3, 7),
+(53, 'Thuật khởi nghiệp', 'http://localhost:5000/api/open-pdf/thuat-khoi-nghiep.pdf', 'http://localhost:5000/api/open-pdf/thuat-khoi-nghiep.jpg', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 2, 7),
+(54, 'Tạm biệt cà rốt và cây gậy', 'http://localhost:5000/api/open-pdf/tam-biet-ca-rot-va-cay-gay.pdf', 'http://localhost:5000/api/open-pdf/tam-biet-ca-rot-va-cay-gay.jpg', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 4, 7),
+(62, 'Chủ nghĩa vô thần', 'http://localhost:5000/api/open-pdf/chu-nghia-vo-than.pdf', 'http://localhost:5000/api/open-pdf/chu-nghia-vo-than.jpg', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
+(63, 'Triết lý làm giàu của người Do Thái', 'http://localhost:5000/api/open-pdf/triet-ly-lam-giau-cua-nguoi-do-thai.pdf', 'http://localhost:5000/api/open-pdf/triet-ly-lam-giau-cua-nguoi-do-thai.jpg', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
+(64, 'Hoa nam kinh', 'http://localhost:5000/api/open-pdf/hoa-nam-kinh.pdf', 'http://localhost:5000/api/open-pdf/hoa-nam-kinh.jpg', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 4, 8),
+(65, 'Một giọt từ sự đọa đày', 'http://localhost:5000/api/open-pdf/mot-giot-tu-su-doa-day.pdf', 'http://localhost:5000/api/open-pdf/mot-giot-tu-su-doa-day.jpg', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
+(66, 'Luận về biếu tặng', 'http://localhost:5000/api/open-pdf/luan-ve-bieu-tang.pdf', 'http://localhost:5000/api/open-pdf/luan-ve-bieu-tang.jpg', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 2, 8),
+(67, 'Kinh tế Việt Nam', 'http://localhost:5000/api/open-pdf/kinh-te-viet-nam.pdf', 'http://localhost:5000/api/open-pdf/kinh-te-viet-nam.jpg', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
+(68, 'Hành trình tri thức của Karl Marx', 'http://localhost:5000/api/open-pdf/hanh-trinh-tri-thuc-cua-Karl-Marx.pdf', 'http://localhost:5000/api/open-pdf/hanh-trinh-tri-thuc-cua-Karl-Marx.jpg', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 2, 8);
 
 -- --------------------------------------------------------
 
