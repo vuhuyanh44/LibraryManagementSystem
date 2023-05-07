@@ -16,7 +16,7 @@
 // module.exports = connection
 const { Sequelize } = require('sequelize')
 
-const db = new Sequelize('library_management_db', 'root', "anhquan1", {
+const db = new Sequelize('library_management_db_1', 'root', "anhquan1", {
   host: 'localhost',
   dialect: 'mysql',
   logging: false

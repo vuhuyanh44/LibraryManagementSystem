@@ -83,7 +83,7 @@ class BorrowingOffController {
     async countBookOfflineRemain(req, res) {
         try {
             const { id } = req.params;
-            const book = await db.book.sequelize.query(`SELECT count(*) as so_luong FROM library_management_db.books
+            const book = await db.book.sequelize.query(`SELECT count(*) as so_luong FROM library_management_db_1.books
             where bookline_id = ${id} and idle = 1`, { type: QueryTypes.SELECT })
             if (!book) {
                 return res.status(404).json({ message: 'Hết sách' });
