@@ -7,4 +7,5 @@ router.post('/borrowing-offline', authenticate.authenticate, borrowingOfflineCon
 router.post('/return-book', authenticate.authenticate, borrowingOfflineController.returnBookOffline)
 router.get('/get-book-borrowed-offline', authenticate.authenticate, borrowingOfflineController.getAllBookBorrowed)
 router.get('/remain-books/:id', borrowingOfflineController.countBookOfflineRemain)
+router.get('/remain-in-repo/:id', borrowingOfflineController.countBookByRepo)
 module.exports = router;
