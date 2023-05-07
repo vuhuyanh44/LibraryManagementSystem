@@ -27,18 +27,31 @@ router.post('/upload', multiUpload, async function (req, res) {
 
 router.get('/open-pdf/:filename', (req, res) => {
     const { filename } = req.params;
-    const pdfPath = "uploads/" + filename;
+    const filePath = "uploads/" + filename;
 
-    fs.readFile(pdfPath, (err, data) => {
+    const fileExtension = path.extname(filePath);
+
+    const allowedTypes = [
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".gif",
+        ".pdf"
+    ];
+
+    if (!allowedTypes.includes(fileExtension)) {
+        return res.status(400).send("Invalid file type");
+    }
+
+    fs.readFile(filePath, (err, data) => {
         if (err) {
             console.error(err);
             return res.sendStatus(500);
         }
 
-        res.contentType('application/pdf');
-        res.contentType('image/png');
-        res.contentType('image/jpeg');
+        res.contentType(fileExtension);
         res.send(data);
     });
 });
+
 module.exports = router;

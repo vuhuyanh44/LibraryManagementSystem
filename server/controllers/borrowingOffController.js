@@ -6,13 +6,13 @@ class BorrowingOffController {
     async createNewBorrowingOff(req, res) {
         try {
             var now = new Date()
-            const { bookline_id } = req.body
+            const { bookline_id, repository_id } = req.body
             const { user } = req;
-
             const book = await db.book.findOne({
                 where: {
                     bookline_id: bookline_id,
-                    idle: 1
+                    idle: 1,
+                    repository_id
                 },
                 limit: 1
             })
@@ -65,7 +65,7 @@ class BorrowingOffController {
     async getAllBookBorrowed(req, res) {
         try {
             const { user } = req;
-            const book = await db.borrowingOnline.sequelize.query(`SELECT borrowing_id,borrowing_date, return_date, due_date,b.book_id,bl.bookline_id,bookline_name,thumnail,repository_name, address FROM borrowing_offlines
+            const book = await db.borrowingOnline.sequelize.query(`SELECT borrowing_id,borrowing_date, return_date, due_date,b.book_id,bl.bookline_id,bookline_name,thumbnail,repository_name, address FROM borrowing_offlines
             inner join books b on b.book_id = borrowing_offlines.book_id
             inner join book_lines bl on bl.bookline_id = b.bookline_id
             inner join repositories r on r.repository_id = b.repository_id
@@ -83,8 +83,25 @@ class BorrowingOffController {
     async countBookOfflineRemain(req, res) {
         try {
             const { id } = req.params;
-            const book = await db.book.sequelize.query(`SELECT count(*) as so_luong FROM library_management_db_1.books
+            const book = await db.book.sequelize.query(`SELECT count(*) as so_luong FROM books
             where bookline_id = ${id} and idle = 1`, { type: QueryTypes.SELECT })
+            if (!book) {
+                return res.status(404).json({ message: 'Hết sách' });
+            }
+            res.status(200).json(book);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server error' });
+        }
+    }
+    //API đếm sách còn lại theo kho 
+    async countBookByRepo(req, res) {
+        try {
+            const { id } = req.params;
+            const book = await db.book.sequelize.query(`SELECT count(*) as so_luong, repository_name, r.address, r.repository_id FROM books b
+            inner join repositories r on r.repository_id = b.repository_id
+            where bookline_id = ${id} and idle = 1
+            group by repository_name`, { type: QueryTypes.SELECT })
             if (!book) {
                 return res.status(404).json({ message: 'Hết sách' });
             }

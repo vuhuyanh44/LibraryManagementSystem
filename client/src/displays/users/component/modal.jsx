@@ -5,6 +5,9 @@ function BookDetailModal({ bookId, showModal, handleCloseModal }) {
     const [book, setBook] = useState(null);
     const [successMessage, setSuccessMessage] = useState("");
     const [count, setCount] = useState(null)
+    const [repolist, setRepolist] = useState([])
+    const [selectedRepoId, setSelectedRepoId] = useState(null);
+
     useEffect(() => {
         const fetchBookDetails = async () => {
             try {
@@ -64,6 +67,7 @@ function BookDetailModal({ bookId, showModal, handleCloseModal }) {
         axios
             .post("http://localhost:5000/api/borrowing-offline", {
                 bookline_id: bookId,
+                repository_id: selectedRepoId
             }, {
                 headers: {
                     'token': localStorage.getItem("token")
@@ -83,6 +87,23 @@ function BookDetailModal({ bookId, showModal, handleCloseModal }) {
                 alert("Đã hết sách")
             });
     };
+
+    useEffect(() => {
+        const fetchBookRemainByRepo = async () => {
+            try {
+                const response = await axios.get(
+                    `http://localhost:5000/api/remain-in-repo/${bookId}`
+                );
+                setRepolist(response.data);
+                console.log(response);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        if (showModal) {
+            fetchBookRemainByRepo();
+        }
+    }, [bookId, showModal]);
     return (
         <div className={`modal ${showModal ? "show" : ""}`}>
             <div className="modal-content">
@@ -99,6 +120,20 @@ function BookDetailModal({ bookId, showModal, handleCloseModal }) {
                         <p>Nhà xuất bản: {book?.publisher_name}</p>
                         <p>Mô tả: {book?.category_description}</p>
                         <p>Số lượng còn lại: {count?.so_luong}</p>
+                        {repolist.map((repo) => (
+                            <div key={repo.repository_id}>
+                                <input
+                                    type="radio"
+                                    id={repo.repository_id}
+                                    name="repository"
+                                    value={repo.repository_id}
+                                    onChange={(e) => setSelectedRepoId(e.target.value)}
+                                />
+                                <label htmlFor={repo.repository_id}>
+                                    Kho: {repo?.repository_name}, Còn lại: {repo?.so_luong}
+                                </label>
+                            </div>
+                        ))}
                         <div className="book-buttons">
                             <button onClick={handleBorrowOnline}>Thuê Online</button>
                             <button onClick={handleBorrowOffline}>Thuê Offline</button>
