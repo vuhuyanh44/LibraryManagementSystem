@@ -93,7 +93,7 @@ function BookDetailModal({ bookId, showModal, handleCloseModal }) {
                     </button>
                 </div>
                 <div className="modal-body">
-                    <img src={require('../image/giatich1.jpg')} alt={book?.bookline_name} />
+                    <img src={book?.thumbnail} alt={book?.bookline_name} />
                     <div className="book-details">
                         <p>Tác giả: {book?.authors}</p>
                         <p>Nhà xuất bản: {book?.publisher_name}</p>

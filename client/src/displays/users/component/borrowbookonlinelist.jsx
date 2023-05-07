@@ -15,7 +15,6 @@ function BorrowedOnlineBookList() {
                 setBorrowedBooks(response.data);
             })
             .catch((error) => {
-                alert("Bạn chưa mượn quyển nào")
                 console.log(error);
             });
     }, []);
@@ -37,8 +36,8 @@ function BorrowedOnlineBookList() {
                         <tr key={borrowedBook.borrowing_id}>
                             <td>{borrowedBook.bookline_name}</td>
                             <td>{new Date(borrowedBook.borrowing_date).toLocaleDateString()}</td>
-                            <td><img src={borrowedBook.thumnail} alt={borrowedBook.bookline_name} id='image' /></td>
-                            {/* <td><button onClick={() => window.location.href = borrowedBook.readUrl}>Đọc</button></td> */}
+                            <td><img src={borrowedBook.thumbnail} alt={borrowedBook.bookline_name} id='image' /></td>
+                            <td><button onClick={() => window.location.href = borrowedBook.document_url}>Đọc</button></td>
                         </tr>
                     ))}
                 </tbody>

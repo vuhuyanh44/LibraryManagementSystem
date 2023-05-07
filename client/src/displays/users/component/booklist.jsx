@@ -38,7 +38,7 @@ function Book(props) {
                 <div className="book-list">
                     {books.map((book) => (
                         <div className="book-card" key={book.bookline_id} onClick={() => handleBookClick(book.bookline_id)} >
-                            <img src={book.thumnail} alt={book.bookline_name} />
+                            <img src={book.thumbnail} alt={book.bookline_name} />
                             <div className="book-details">
                                 <h2>{book.bookline_name}</h2>
                             </div>
