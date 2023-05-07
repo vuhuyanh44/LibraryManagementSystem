@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 // import Profile from '../../../../components/profile/profile';
 import { FaWarehouse } from 'react-icons/fa';
-import { IoCarSport } from 'react-icons/io5';
+import { IoCarSport, IoReceipt } from 'react-icons/io5';
 import { HiWrenchScrewdriver } from 'react-icons/hi2';
 import { FiLogOut } from 'react-icons/fi';
 import { VscGraphLine } from 'react-icons/vsc'
@@ -11,7 +11,6 @@ import { FaBoxes } from 'react-icons/fa'
 
 
 import { useState, useEffect } from 'react';
-// import Statistical from '../statistical/statistical';
 export default function Sidebar() {
 
     const [selected, setSelected] = useState(0);
@@ -33,17 +32,10 @@ export default function Sidebar() {
                         </li>
                     </NavLink>
 
-                    <NavLink style={{ textDecoration: 'none' }} to='/infoBookNew'>
-                        <li title='product'>
-                            <IoCarSport className='icon3' />
-                            <span>Book</span>
-                        </li >
-                    </NavLink>
-
                     <NavLink style={{ textDecoration: 'none' }} to='/infoBorrowsOff'>
                         <li title='product'>
-                            <IoCarSport className='icon3' />
-                            <span>Thông tin người mượn</span>
+                            <IoReceipt className='icon3' />
+                            <span>Phiếu mượn</span>
                         </li >
                     </NavLink>
 

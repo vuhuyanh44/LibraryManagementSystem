@@ -10,16 +10,24 @@ import CancelIcon from "@mui/icons-material/Close";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import AddButton from "./AddButton";
 
 
 export default function BorrowsOff() {
+  const apiEditData = 'http://localhost:5000/api/borrowingOff';
   const height = 630;
   const [rowModesModel, setRowModesModel] = React.useState({});
 
   const [rows, setRows] = useState([]);
 
+  const [isAdd, setIsAdd] = useState(false);
+  
+
   useEffect(() => {
-    const getInfoBorrowsOff = async () => {
+    getInfoBorrowsOff();  
+  }, []);
+  
+  const getInfoBorrowsOff = async () => {
       try {
         const res = await axios.get(
           "http://localhost:5000/api/infoBorrowOff"
@@ -29,17 +37,17 @@ export default function BorrowsOff() {
         console.log(error);
       }
     };
-    getInfoBorrowsOff();
-  }, []);
 
   console.log(rows);
 
   const handleEditClick = (id) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
+    getInfoBorrowsOff();
   };
 
   const handleSaveClick = (id) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+    getInfoBorrowsOff();
   };
 
   const handleDeleteClick = (id) => () => {
@@ -61,44 +69,41 @@ export default function BorrowsOff() {
 
   const columns = [
     {
+      title: "borrowing_id",
+      headerName: "borrowing_id",
+      field: "_id",
+      editable: false,
+    },
+    {
       title: "user_id",
       headerName: "user_id",
-      field: "_id",
-      width: 80,
+      field: "user_id",
       editable: false,
     },
     {
       title: "name",
       headerName: "name",
       field: "name",
-      width: 180,
+      width: 148,
       editable: true,
     },
     {
       title: "book_id",
       headerName: "book_id",
       field: "book_id",
-      width: 180,
       editable: false,
     },
     {
       title: "book_name",
       headerName: "book_name",
       field: "book_name",
-      width: 180,
+      width: 200,
       editable: true,
     },
     {
       title: "borrow_date",
       headerName: "borrow_date",
       field: "borrow_date",
-      width: 180,
-      editable: true,
-    },
-    {
-      title: "borrow_time",
-      headerName: "borrow_time",
-      field: "borrow_time",
       width: 180,
       editable: true,
     },
@@ -122,7 +127,9 @@ export default function BorrowsOff() {
       headerName: "Actions",
       cellClassName: "actions",
       getActions: ({ id }) => {
+        // nếu muốn edit -> click vào edit -> isInEditMode=true
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+
         if (isInEditMode) {
           return [
             <GridActionsCellItem
@@ -164,6 +171,7 @@ export default function BorrowsOff() {
         <Sidebar />
         <div className="wrapper">
           <Navbar/>
+          <h2 className='header_sloan'>Thông tin phiếu mượn</h2>
           <Table
           {...{
             columns,
@@ -172,8 +180,10 @@ export default function BorrowsOff() {
             height,
             rowModesModel,
             setRowModesModel,
+            apiEditData,
           }}
         />
+        <AddButton/>
         </div>
       </div>
     );

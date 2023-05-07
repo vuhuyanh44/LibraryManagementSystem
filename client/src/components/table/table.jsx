@@ -14,6 +14,7 @@ const Table = ({
   rowModesModel,
   setRowModesModel,
   handleOnCellClick,
+  apiEditData,
 }) => {
   const [pageSize, setPageSize] = useState(10);
 
@@ -29,7 +30,7 @@ const Table = ({
     console.log(newRow);
     try {
       const res = await axios.put(
-        "http://localhost:8000/api/toyProduct/",
+        `${apiEditData}/${newRow._id}`,
         newRow
       );
       console.log(res.data);
