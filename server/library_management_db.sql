@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: May 07, 2023 at 08:22 AM
+-- Generation Time: May 07, 2023 at 10:56 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -13,7 +13,7 @@ SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTERa_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
@@ -372,7 +372,8 @@ INSERT INTO `books` (`book_id`, `createdAt`, `updatedAt`, `repository_id`, `Idle
 CREATE TABLE `book_lines` (
   `bookline_id` int(11) NOT NULL,
   `bookline_name` varchar(255) NOT NULL,
-  `thumnail` varchar(255) DEFAULT NULL,
+  `document_url` varchar(255) DEFAULT NULL,
+  `thumbnail` varchar(255) DEFAULT NULL,
   `createdAt` datetime NOT NULL DEFAULT current_timestamp(),
   `updatedAt` datetime NOT NULL DEFAULT current_timestamp(),
   `publisher_id` int(11) DEFAULT NULL,
@@ -383,68 +384,68 @@ CREATE TABLE `book_lines` (
 -- Dumping data for table `book_lines`
 --
 
-INSERT INTO `book_lines` (`bookline_id`, `bookline_name`, `thumnail`, `createdAt`, `updatedAt`, `publisher_id`, `category_id`) VALUES
-(1, 'Xác suất thống kê', 'xac-suat-thong-ke.pdf', '2023-05-07 00:45:11', '2023-05-07 00:45:11', 1, 1),
-(2, 'Giải tích 1', 'giai-tich-1.pdf', '2023-04-28 15:35:01', '2023-04-28 15:35:01', 1, 1),
-(3, 'Giải tích 2', 'giai-tich-2.pdf', '2023-04-28 15:35:31', '2023-04-28 15:35:31', 3, 1),
-(4, 'Nhập môn mạng máy tính', 'nhap-mon-mang-may-tinh.pdf', '2023-04-28 15:36:04', '2023-04-28 15:36:04', 1, 4),
-(5, 'Sức bền vật liệu', 'suc-ben-vat-lieu.pdff', '2023-04-28 15:37:09', '2023-04-28 15:37:09', 2, 3),
-(6, 'Đại số tuyến tính', 'dai-so-tuyen-tinh.pdf', '2023-05-07 00:45:11', '2023-05-07 00:45:11', 1, 1),
-(7, 'Logic học cương', 'logic-hoc-cuong.pdf', '2023-05-07 00:59:32', '2023-05-07 00:59:32', 1, 1),
-(8, 'Toán rời rạc', 'toan-roi-rac.pdf', '2023-05-07 01:15:38', '2023-05-07 01:15:38', 1, 1),
-(9, 'Toán cao cấp', 'toan-cao-cap.pdf', '2023-05-07 01:19:00', '2023-05-07 01:19:00', 1, 1),
-(10, 'Otomat và thuật toán', 'otomat-va-thuat-toan.pdf', '2023-05-07 01:22:09', '2023-05-07 01:22:09', 1, 1),
-(11, 'Quy hoạch tuyến tính', 'quy-hoach-tuyen-tinh.pdf', '2023-05-07 01:34:02', '2023-05-07 01:34:02', 4, 1),
-(12, 'Phương pháp số thực hành', 'phuong-phap-so-thuc-hanh.pdf', '2023-05-07 01:38:00', '2023-05-07 01:38:00', 1, 1),
-(13, 'Phương pháp tính', 'phuong-phap-tinh.pdf', '2023-05-07 01:42:09', '2023-05-07 01:42:09', 4, 1),
-(14, 'Advanced Database Systems', 'advanced-database-system.pdf', '2023-05-07 01:49:47', '2023-05-07 01:49:47', 3, 4),
-(15, 'Dữ Liệu Lớn', 'du-lieu-lon.pdf', '2023-05-07 01:54:45', '2023-05-07 01:54:45', 2, 4),
-(16, 'Ký giả chuyên nghiệp', 'ky-gia-chuyen-nghiep.pdf', '2023-05-07 01:58:28', '2023-05-07 01:58:28', 3, 4),
-(17, 'Giải thuật và lập trình', 'giai-thuat-va-lap-trinh', '2023-05-07 02:01:54', '2023-05-07 02:01:54', 2, 4),
-(18, 'Machine Learning cơ bản', 'machine-learning-co-ban.pdf', '2023-05-07 02:04:35', '2023-05-07 02:04:35', 3, 4),
-(19, 'Phương thức Amazon - 10 nguyên lý Internet vạn vật', 'amazon-10-nguyen-ly-internet-van-vat.pdf', '2023-05-07 02:10:20', '2023-05-07 02:10:20', 2, 4),
-(20, 'Bóng Ma Trên Mạng', 'bong-ma-tren-mang.pdf', '2023-05-07 02:12:23', '2023-05-07 02:12:23', 3, 4),
-(21, 'Khoa học và những giấc mơ', 'khoa-hoc-va-nhung-giac-mo.pdf', '2023-05-07 09:12:27', '2023-05-07 09:12:27', 2, 3),
-(22, 'Tương lai nhân loại', 'tuong-lai-nhan-loai.pdf', '2023-05-07 09:14:14', '2023-05-07 09:14:14', 3, 3),
-(23, 'Lý thuyết mạch', 'ly-thuyet-mach.pdf', '2023-05-07 09:16:39', '2023-05-07 09:16:39', 3, 3),
-(24, 'Học thuyết Darwin', 'hoc-thuyet-darwin.pdf', '2023-05-07 09:19:06', '2023-05-07 09:19:06', 2, 3),
-(25, 'Sự sống', 'su-song.pdf', '2023-05-07 09:21:27', '2023-05-07 09:21:27', 2, 3),
-(26, 'Nhật ký người điên', 'nhat-ky-nguoi-dien.pdf', '2023-05-07 09:24:16', '2023-05-07 09:24:16', 2, 2),
-(27, 'Nhạn', 'nhan.pdf', '2023-05-07 09:26:53', '2023-05-07 09:26:53', 2, 2),
-(28, 'Người Tị Nạn', 'nguoi-ti-nan.pdf', '2023-05-07 09:29:03', '2023-05-07 09:29:03', 2, 2),
-(29, 'Nhất phẩm thiên kim', 'nhat-pham-thien-kim.pdf', '2023-05-07 09:30:53', '2023-05-07 09:30:53', 2, 2),
-(30, 'Người ăn chay', 'nguoi-an-chay.pdf', '2023-05-07 09:32:26', '2023-05-07 09:32:26', 2, 2),
-(31, 'Nắng trong vườn', 'nang-trong-vuon.pdf', '2023-05-07 09:35:37', '2023-05-07 09:35:37', 4, 2),
-(32, 'Mưu sát tuổi xuân', 'muu-sat-tuoi-xuan.pdf', '2023-05-07 09:37:22', '2023-05-07 09:37:22', 2, 2),
-(33, 'Nền tảng đạo đức', 'nen-tang-dao-duc.pdf', '2023-05-07 09:40:41', '2023-05-07 09:40:41', 2, 5),
-(34, 'Tôi giải mã tôi', 'toi-giai-ma-toi.pdf', '2023-05-07 09:42:42', '2023-05-07 09:42:42', 2, 5),
-(35, '14 nguyên tắc thành công', '14-nguyen-tac-thanh-cong.pdf', '2023-05-07 09:44:18', '2023-05-07 09:44:18', 2, 5),
-(36, 'Chiến thắng trò chơi cuộc sống', 'chien-thang-tro-choi-cuoc-song.pdf', '2023-05-07 09:46:32', '2023-05-07 09:46:32', 3, 5),
-(37, 'Chiến thắng nỗi lo và sự căng thẳng', 'chien-thang-noi-lo-va-su-cang-thang.pdf', '2023-05-07 09:49:07', '2023-05-07 09:49:07', 4, 5),
-(38, 'Sức mạnh tư duy', 'suc-manh-tu-duy.pdf', '2023-05-07 09:50:55', '2023-05-07 09:50:55', 3, 5),
-(39, 'Sống để hạnh phúc', 'song-de-hanh-phuc.pdf', '2023-05-07 09:52:29', '2023-05-07 09:52:29', 2, 5),
-(40, 'Nạn dịch vaccine', 'nan-dich-vaccine.pdf', '2023-05-07 09:55:05', '2023-05-07 09:55:05', 2, 6),
-(41, 'Phương pháp tác động đầu và cột sống', 'phuong-phap-tac-dong-dau-va-cot-song.pdf', '2023-05-07 09:56:38', '2023-05-07 09:56:38', 3, 6),
-(42, 'Yoga dưỡng sinh', 'yoga-duong-sinh.pdf', '2023-05-07 09:58:30', '2023-05-07 09:58:30', 2, 6),
-(43, 'Trái cây chữa bệnh - Món ăn bài thuốc', 'trai-cay-chua-benh-mon-an-bai-thuoc.pdf', '2023-05-07 10:00:25', '2023-05-07 10:00:25', 3, 6),
-(44, '31 quả táo tinh thần', '31-qua-tao-tinh-than.pdf', '2023-05-07 10:02:43', '2023-05-07 10:02:43', 2, 6),
-(45, 'Ngủ ít vẫn khỏe', 'ngu-it-van-khoe.pdf', '2023-05-07 10:04:49', '2023-05-07 10:04:49', 4, 6),
-(46, 'Uống trà trị bách bệnh', 'uong-tra-tri-bach-benh.pdf', '2023-05-07 10:06:08', '2023-05-07 10:06:08', 3, 6),
-(47, 'Để lành bệnh tự nhiên', 'de-lanh-benh-tu-nhien.pdf', '2023-05-07 10:07:25', '2023-05-07 10:07:25', 2, 6),
-(48, 'Định vị - Cuộc chiến giành tâm lý khách hàng', 'dinh-vi.pdf', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 2, 7),
-(49, 'Đánh cắp ý tưởng', 'danh-cap-y-tuong.pdff', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 3, 7),
-(50, '1001 cách giữ chân khách hàng', '1001-cach-giu-chan-khach-hang.pdf', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 4, 7),
-(51, 'Khởi nghiệp tinh gọn', 'khoi-nghiep-tinh-gon.pdf', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 2, 7),
-(52, 'Bí quyết kinh doanh', 'bi-quyet-kinh-doanh.pdf', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 3, 7),
-(53, 'Thuật khởi nghiệp', 'thuat-khoi-nghiep.pdf', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 2, 7),
-(54, 'Tạm biệt cà rốt và cây gậy', 'tam-biet-ca-rot-va-cay-gay.pdf', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 4, 7),
-(62, 'Chủ nghĩa vô thần', 'chu-nghia-vo-than.pdf', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
-(63, 'Triết lý làm giàu của người Do Thái', 'triet-ly-lam-giau-cua-nguoi-do-thai.pdf', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
-(64, 'Hoa nam kinh', 'hoa-nam-kinh.pdf', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 4, 8),
-(65, 'Một giọt từ sự đọa đày', 'mot-giot-tu-su-doa-day.pdf', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
-(66, 'Luận về biếu tặng', 'luan-ve-bieu-tang.pdf', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 2, 8),
-(67, 'Kinh tế Việt Nam', 'kinh-te-viet-nam.pdf', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
-(68, 'Hành trình tri thức của Karl Marx', 'hanh-trinh-tri-thuc-cua-Karl-Marx.pdf', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 2, 8);
+INSERT INTO `book_lines` (`bookline_id`, `bookline_name`, `document_url`, `thumbnail`, `createdAt`, `updatedAt`, `publisher_id`, `category_id`) VALUES
+(1, 'Xác suất thống kê', 'http://localhost:5000/api/open-pdf/xac-suat-thong-ke.pdf', 'http://localhost:5000/api/open-pdf/xac-suat-thong-ke.png', '2023-05-07 00:45:11', '2023-05-07 00:45:11', 1, 1),
+(2, 'Giải tích 1', 'http://localhost:5000/api/open-pdf/giai-tich-1.pdf', 'http://localhost:5000/api/open-pdf/giai-tich-1.png', '2023-04-28 15:35:01', '2023-04-28 15:35:01', 1, 1),
+(3, 'Giải tích 2', 'http://localhost:5000/api/open-pdf/giai-tich-2.pdf', 'http://localhost:5000/api/open-pdf/giai-tich-2.png', '2023-04-28 15:35:31', '2023-04-28 15:35:31', 3, 1),
+(4, 'Nhập môn mạng máy tính', 'http://localhost:5000/api/open-pdf/nhap-mon-mang-may-tinh.pdf', 'http://localhost:5000/api/open-pdf/nhap-mon-mang-may-tinh.png', '2023-04-28 15:36:04', '2023-04-28 15:36:04', 1, 4),
+(5, 'Sức bền vật liệu', 'http://localhost:5000/api/open-pdf/suc-ben-vat-lieu.pdf', 'http://localhost:5000/api/open-pdf/suc-ben-vat-lieu.png', '2023-04-28 15:37:09', '2023-04-28 15:37:09', 2, 3),
+(6, 'Đại số tuyến tính', 'http://localhost:5000/api/open-pdf/dai-so-tuyen-tinh.pdf', 'http://localhost:5000/api/open-pdf/dai-so-tuyen-tinh.png', '2023-05-07 00:45:11', '2023-05-07 00:45:11', 1, 1),
+(7, 'Logic học cương', 'http://localhost:5000/api/open-pdf/logic-hoc-cuong.pdf', 'http://localhost:5000/api/open-pdf/logic-hoc-cuong.png', '2023-05-07 00:59:32', '2023-05-07 00:59:32', 1, 1),
+(8, 'Toán rời rạc', 'http://localhost:5000/api/open-pdf/toan-roi-rac.pdf', 'http://localhost:5000/api/open-pdf/toan-roi-rac.png', '2023-05-07 01:15:38', '2023-05-07 01:15:38', 1, 1),
+(9, 'Toán cao cấp', 'http://localhost:5000/api/open-pdf/toan-cao-cap.pdf', 'http://localhost:5000/api/open-pdf/toan-cao-cap.png', '2023-05-07 01:19:00', '2023-05-07 01:19:00', 1, 1),
+(10, 'Otomat và thuật toán', 'http://localhost:5000/api/open-pdf/otomat-va-thuat-toan.pdf', 'http://localhost:5000/api/open-pdf/otomat-va-thuat-toan.png', '2023-05-07 01:22:09', '2023-05-07 01:22:09', 1, 1),
+(11, 'Quy hoạch tuyến tính', 'http://localhost:5000/api/open-pdf/quy-hoach-tuyen-tinh.pdf', 'http://localhost:5000/api/open-pdf/quy-hoach-tuyen-tinh.png', '2023-05-07 01:34:02', '2023-05-07 01:34:02', 4, 1),
+(12, 'Phương pháp số thực hành', 'http://localhost:5000/api/open-pdf/phuong-phap-so-thuc-hanh.pdf', 'http://localhost:5000/api/open-pdf/phuong-phap-so-thuc-hanh.png', '2023-05-07 01:38:00', '2023-05-07 01:38:00', 1, 1),
+(13, 'Phương pháp tính', 'http://localhost:5000/api/open-pdf/phuong-phap-tinh.pdf', 'http://localhost:5000/api/open-pdf/phuong-phap-tinh.png', '2023-05-07 01:42:09', '2023-05-07 01:42:09', 4, 1),
+(14, 'Advanced Database Systems', 'http://localhost:5000/api/open-pdf/advanced-database-system.pdf', 'http://localhost:5000/api/open-pdf/advanced-database-system.png', '2023-05-07 01:49:47', '2023-05-07 01:49:47', 3, 4),
+(15, 'Dữ Liệu Lớn', 'http://localhost:5000/api/open-pdf/du-lieu-lon.pdf', 'http://localhost:5000/api/open-pdf/du-lieu-lon.jpg', '2023-05-07 01:54:45', '2023-05-07 01:54:45', 2, 4),
+(16, 'Ký giả chuyên nghiệp', 'http://localhost:5000/api/open-pdf/ky-gia-chuyen-nghiep.pdf', 'http://localhost:5000/api/open-pdf/ky-gia-chuyen-nghiep.jpg', '2023-05-07 01:58:28', '2023-05-07 01:58:28', 3, 4),
+(17, 'Giải thuật và lập trình', 'http://localhost:5000/api/open-pdf/giai-thuat-va-lap-trinh.pdf', 'http://localhost:5000/api/open-pdf/giai-thuat-va-lap-trinh.jpg', '2023-05-07 02:01:54', '0000-00-00 00:00:00', 2, 4),
+(18, 'Machine Learning cơ bản', 'http://localhost:5000/api/open-pdf/machine-learning-co-ban.pdf', 'http://localhost:5000/api/open-pdf/machine-learning-co-ban.jpg', '2023-05-07 02:04:35', '2023-05-07 02:04:35', 3, 4),
+(19, 'Phương thức Amazon - 10 nguyên lý Internet vạn vật', 'http://localhost:5000/api/open-pdf/amazon-10-nguyen-ly-internet-van-vat.pdf', 'http://localhost:5000/api/open-pdf/amazon-10-nguyen-ly-internet-van-vat.jpg', '2023-05-07 02:10:20', '2023-05-07 02:10:20', 2, 4),
+(20, 'Bóng Ma Trên Mạng', 'http://localhost:5000/api/open-pdf/bong-ma-tren-mang.pdf', 'http://localhost:5000/api/open-pdf/bong-ma-tren-mang.jpg', '2023-05-07 02:12:23', '2023-05-07 02:12:23', 3, 4),
+(21, 'Khoa học và những giấc mơ', 'http://localhost:5000/api/open-pdf/khoa-hoc-va-nhung-giac-mo.pdf', 'http://localhost:5000/api/open-pdf/khoa-hoc-va-nhung-giac-mo.jpg', '2023-05-07 09:12:27', '2023-05-07 09:12:27', 2, 3),
+(22, 'Tương lai nhân loại', 'http://localhost:5000/api/open-pdf/tuong-lai-nhan-loai.pdf', 'http://localhost:5000/api/open-pdf/tuong-lai-nhan-loai.jpg', '2023-05-07 09:14:14', '2023-05-07 09:14:14', 3, 3),
+(23, 'Lý thuyết mạch', 'http://localhost:5000/api/open-pdf/ly-thuyet-mach.pdf', 'http://localhost:5000/api/open-pdf/ly-thuyet-mach.jpg', '2023-05-07 09:16:39', '2023-05-07 09:16:39', 3, 3),
+(24, 'Học thuyết Darwin', 'http://localhost:5000/api/open-pdf/hoc-thuyet-darwin.pdf', 'http://localhost:5000/api/open-pdf/hoc-thuyet-darwin.jpg', '2023-05-07 09:19:06', '2023-05-07 09:19:06', 2, 3),
+(25, 'Sự sống', 'http://localhost:5000/api/open-pdf/su-song.pdf', 'http://localhost:5000/api/open-pdf/su-song.jpg', '2023-05-07 09:21:27', '2023-05-07 09:21:27', 2, 3),
+(26, 'Nhật ký người điên', 'http://localhost:5000/api/open-pdf/nhat-ky-nguoi-dien.pdf', 'http://localhost:5000/api/open-pdf/nhat-ky-nguoi-dien.jpg', '2023-05-07 09:24:16', '2023-05-07 09:24:16', 2, 2),
+(27, 'Nhạn', 'http://localhost:5000/api/open-pdf/nhan.pdf', 'http://localhost:5000/api/open-pdf/nhan.jpg', '2023-05-07 09:26:53', '2023-05-07 09:26:53', 2, 2),
+(28, 'Người Tị Nạn', 'http://localhost:5000/api/open-pdf/nguoi-ti-nan.pdf', 'http://localhost:5000/api/open-pdf/nguoi-ti-nan.jpg', '2023-05-07 09:29:03', '2023-05-07 09:29:03', 2, 2),
+(29, 'Nhất phẩm thiên kim', 'http://localhost:5000/api/open-pdf/nhat-pham-thien-kim.pdf', 'http://localhost:5000/api/open-pdf/nhat-pham-thien-kim.jpg', '2023-05-07 09:30:53', '2023-05-07 09:30:53', 2, 2),
+(30, 'Người ăn chay', 'http://localhost:5000/api/open-pdf/nguoi-an-chay.pdf', 'http://localhost:5000/api/open-pdf/nguoi-an-chay.jpg', '2023-05-07 09:32:26', '2023-05-07 09:32:26', 2, 2),
+(31, 'Nắng trong vườn', 'http://localhost:5000/api/open-pdf/nang-trong-vuon.pdf', 'http://localhost:5000/api/open-pdf/nang-trong-vuon.jpg', '2023-05-07 09:35:37', '2023-05-07 09:35:37', 4, 2),
+(32, 'Mưu sát tuổi xuân', 'http://localhost:5000/api/open-pdf/muu-sat-tuoi-xuan.pdf', 'http://localhost:5000/api/open-pdf/muu-sat-tuoi-xuan.jpg', '2023-05-07 09:37:22', '2023-05-07 09:37:22', 2, 2),
+(33, 'Nền tảng đạo đức', 'http://localhost:5000/api/open-pdf/nen-tang-dao-duc.pdf', 'http://localhost:5000/api/open-pdf/nen-tang-dao-duc.jpg', '2023-05-07 09:40:41', '2023-05-07 09:40:41', 2, 5),
+(34, 'Tôi giải mã tôi', 'http://localhost:5000/api/open-pdf/toi-giai-ma-toi.pdf', 'http://localhost:5000/api/open-pdf/toi-giai-ma-toi.jpg', '2023-05-07 09:42:42', '2023-05-07 09:42:42', 2, 5),
+(35, '14 nguyên tắc thành công', 'http://localhost:5000/api/open-pdf/14-nguyen-tac-thanh-cong.pdf', 'http://localhost:5000/api/open-pdf/14-nguyen-tac-thanh-cong.jpg', '2023-05-07 09:44:18', '2023-05-07 09:44:18', 2, 5),
+(36, 'Chiến thắng trò chơi cuộc sống', 'http://localhost:5000/api/open-pdf/chien-thang-tro-choi-cuoc-song.pdf', 'http://localhost:5000/api/open-pdf/chien-thang-tro-choi-cuoc-song.jpg', '2023-05-07 09:46:32', '2023-05-07 09:46:32', 3, 5),
+(37, 'Chiến thắng nỗi lo và sự căng thẳng', 'http://localhost:5000/api/open-pdf/chien-thang-noi-lo-va-su-cang-thang.pdf', 'http://localhost:5000/api/open-pdf/chien-thang-noi-lo-va-su-cang-thang.jpg', '2023-05-07 09:49:07', '2023-05-07 09:49:07', 4, 5),
+(38, 'Sức mạnh tư duy', 'http://localhost:5000/api/open-pdf/suc-manh-tu-duy.pdf', 'http://localhost:5000/api/open-pdf/suc-manh-tu-duy.jpg', '2023-05-07 09:50:55', '2023-05-07 09:50:55', 3, 5),
+(39, 'Sống để hạnh phúc', 'http://localhost:5000/api/open-pdf/song-de-hanh-phuc.pdf', 'http://localhost:5000/api/open-pdf/song-de-hanh-phuc.jpg', '2023-05-07 09:52:29', '2023-05-07 09:52:29', 2, 5),
+(40, 'Nạn dịch vaccine', 'http://localhost:5000/api/open-pdf/nan-dich-vaccine.pdf', 'http://localhost:5000/api/open-pdf/nan-dich-vaccine.jpg', '2023-05-07 09:55:05', '2023-05-07 09:55:05', 2, 6),
+(41, 'Phương pháp tác động đầu và cột sống', 'http://localhost:5000/api/open-pdf/phuong-phap-tac-dong-dau-va-cot-song.pdf', 'http://localhost:5000/api/open-pdf/phuong-phap-tac-dong-dau-va-cot-song.jpg', '2023-05-07 09:56:38', '2023-05-07 09:56:38', 3, 6),
+(42, 'Yoga dưỡng sinh', 'http://localhost:5000/api/open-pdf/yoga-duong-sinh.pdf', 'http://localhost:5000/api/open-pdf/yoga-duong-sinh.jpg', '2023-05-07 09:58:30', '2023-05-07 09:58:30', 2, 6),
+(43, 'Trái cây chữa bệnh - Món ăn bài thuốc', 'http://localhost:5000/api/open-pdf/trai-cay-chua-benh-mon-an-bai-thuoc.pdf', 'http://localhost:5000/api/open-pdf/trai-cay-chua-benh-mon-an-bai-thuoc.jpg', '2023-05-07 10:00:25', '2023-05-07 10:00:25', 3, 6),
+(44, '31 quả táo tinh thần', 'http://localhost:5000/api/open-pdf/31-qua-tao-tinh-than.pdf', 'http://localhost:5000/api/open-pdf/31-qua-tao-tinh-than.jpg', '2023-05-07 10:02:43', '2023-05-07 10:02:43', 2, 6),
+(45, 'Ngủ ít vẫn khỏe', 'http://localhost:5000/api/open-pdf/ngu-it-van-khoe.pdf', 'http://localhost:5000/api/open-pdf/ngu-it-van-khoe.jpg', '2023-05-07 10:04:49', '2023-05-07 10:04:49', 4, 6),
+(46, 'Uống trà trị bách bệnh', 'http://localhost:5000/api/open-pdf/uong-tra-tri-bach-benh.pdf', 'http://localhost:5000/api/open-pdf/uong-tra-tri-bach-benh.jpg', '2023-05-07 10:06:08', '2023-05-07 10:06:08', 3, 6),
+(47, 'Để lành bệnh tự nhiên', 'http://localhost:5000/api/open-pdf/de-lanh-benh-tu-nhien.pdf', 'http://localhost:5000/api/open-pdf/de-lanh-benh-tu-nhien.jpg', '2023-05-07 10:07:25', '2023-05-07 10:07:25', 2, 6),
+(48, 'Định vị - Cuộc chiến giành tâm lý khách hàng', 'dinh-vi.pdf', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 2, 7),
+(49, 'Đánh cắp ý tưởng', 'danh-cap-y-tuong.pdff', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 3, 7),
+(50, '1001 cách giữ chân khách hàng', '1001-cach-giu-chan-khach-hang.pdf', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 4, 7),
+(51, 'Khởi nghiệp tinh gọn', 'khoi-nghiep-tinh-gon.pdf', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 2, 7),
+(52, 'Bí quyết kinh doanh', 'bi-quyet-kinh-doanh.pdf', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 3, 7),
+(53, 'Thuật khởi nghiệp', 'thuat-khoi-nghiep.pdf', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 2, 7),
+(54, 'Tạm biệt cà rốt và cây gậy', 'tam-biet-ca-rot-va-cay-gay.pdf', '', '2023-05-07 12:54:48', '2023-05-07 12:54:48', 4, 7),
+(62, 'Chủ nghĩa vô thần', 'chu-nghia-vo-than.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
+(63, 'Triết lý làm giàu của người Do Thái', 'triet-ly-lam-giau-cua-nguoi-do-thai.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
+(64, 'Hoa nam kinh', 'hoa-nam-kinh.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 4, 8),
+(65, 'Một giọt từ sự đọa đày', 'mot-giot-tu-su-doa-day.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
+(66, 'Luận về biếu tặng', 'luan-ve-bieu-tang.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 2, 8),
+(67, 'Kinh tế Việt Nam', 'kinh-te-viet-nam.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 3, 8),
+(68, 'Hành trình tri thức của Karl Marx', 'hanh-trinh-tri-thuc-cua-Karl-Marx.pdf', '', '2023-05-07 13:12:03', '2023-05-07 13:12:03', 2, 8);
 
 -- --------------------------------------------------------
 
