@@ -38,7 +38,7 @@ function Book(props) {
                 <div className="book-list">
                     {books.map((book) => (
                         <div className="book-card" key={book.bookline_id} onClick={() => handleBookClick(book.bookline_id)} >
-                            <img src={require('../image/giatich1.jpg')} alt={book.title} />
+                            <img src={book.thumnail} alt={book.bookline_name} />
                             <div className="book-details">
                                 <h2>{book.bookline_name}</h2>
                             </div>
@@ -52,7 +52,10 @@ function Book(props) {
                 <button className="filter-btn" onClick={() => filterByCategory('Văn học')}>Văn học</button>
                 <button className="filter-btn" onClick={() => filterByCategory('Khoa học kĩ thuật')}>Khoa học kĩ thuật</button>
                 <button className="filter-btn" onClick={() => filterByCategory('Công nghệ thông tin')}>Công nghệ thông tin</button>
-                <button className="filter-btn" onClick={() => filterByCategory('Văn học')}>Văn học</button>
+                <button className="filter-btn" onClick={() => filterByCategory('Phát triển bản thân')}>Phát triển bản thân</button>
+                <button className="filter-btn" onClick={() => filterByCategory('Y học và sức khỏe')}>Y học và sức khỏe</button>
+                <button className="filter-btn" onClick={() => filterByCategory('Quản trị kinh doanh')}>Quản trị kinh doanh</button>
+                <button className="filter-btn" onClick={() => filterByCategory('Triết học - Lý luận')}>Triết học - Lý luận</button>
             </div>
 
             <BookDetailModal

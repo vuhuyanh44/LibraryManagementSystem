@@ -1,0 +1,40 @@
+table.borrowed-books {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    font-size: 1.2em;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+table.borrowed-books th {
+    background-color: #f2f2f2;
+    color: #000;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+table.borrowed-books td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+table.borrowed-books td button {
+    padding: 10px;
+    background-color: #0074d9;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+table.borrowed-books td button:hover {
+    background-color: #265a88;
+}
+
+#image {
+    width: 100px;
+    height: 100px;
+}
