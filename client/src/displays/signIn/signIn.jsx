@@ -93,7 +93,7 @@ export default function SignIn() {
                 </div>
               </div>
               <div className="signInFooter">
-                <p>© 2022 Produce Move by Pro-team</p>
+                <p>© 2022 Library management system by Pro-team</p>
               </div>
   
               
