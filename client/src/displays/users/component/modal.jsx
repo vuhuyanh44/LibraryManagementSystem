@@ -123,6 +123,7 @@ function BookDetailModal({ bookId, showModal, handleCloseModal }) {
                         {repolist.map((repo) => (
                             <div key={repo.repository_id}>
                                 <input
+                                    className="inputRadio"
                                     type="radio"
                                     id={repo.repository_id}
                                     name="repository"

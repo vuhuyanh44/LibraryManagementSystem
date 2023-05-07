@@ -13,7 +13,10 @@
 .modal.show {
     display: block; /* Hiện modal khi showModal = true */
 }
-
+.inputRadio {
+    width: 20px;
+    height: 20px;
+}
 .modal-content {
     display: grid;
     grid-template-columns: 1fr 2fr; /* Chia layout thành 2 cột */
